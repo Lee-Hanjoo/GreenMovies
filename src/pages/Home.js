@@ -5,12 +5,12 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-const Home = () => {
+const Home = ({nav}) => {
 
   const [tab, setTab] = useState('trend')
 
   return (
-    <div className='home-wrap'>
+    <div className='home wrap'>
       <Link to='/detail'>
         <button type='button' className='play-btn' />
       </Link>

@@ -1,29 +1,24 @@
 import React, { Children, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import Search from './Search'
 
-const Header = () => {
+const Header = ({setSub}) => {
 
-  const [search, setSearch] = useState(false)
-  const searchValue = useRef()
-  // if(!search) {
-  //   searchValue.current.value = ''
-  // }
+  const [nav, setNav] = useState(false)
+  const navigate = useNavigate();
 
   return (
     <header className='header'>
-      <h1 className='logo'>LOGO</h1>
-      <nav className='nav'>
-        <button type='button' className='nav-btn' />
+      <h1 className='logo' onClick={()=>{navigate('/')}}>LOGO</h1>
+      <nav className={`nav ${nav ? 'on' : ''}`}>
+        <button type='button' className='nav-btn' onClick={()=>{setNav(!nav)}}/>
         <div>
-          <Link className='home' to='/'>Home</Link>
-          <Link className='movie' to='/'>Movies</Link>
-          <Link className='tv' to='/'>TV Series</Link>
+          <Link className='home' to='/' onClick={()=>{setSub('home')}}>Home</Link>
+          <Link className='movie' to='/' onClick={()=>{setSub('movie')}}>Movies</Link>
+          <Link className='tv' to='/' onClick={()=>{setSub('tv')}}>TV Series</Link>
         </div>
       </nav>
-      <div className={`search-wrap ${search ? 'on' : ''}`}>
-        <input type='text' className='search-input' ref={searchValue}></input>
-        <button type='button' className='search-btn' onClick={()=>{setSearch(!search)}} />
-      </div>
+      <Search setSub={setSub} />
     </header>
   )
 }
