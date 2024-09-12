@@ -1,16 +1,13 @@
 import React from 'react'
 import MovieItem from '../component/MovieItem';
+import Sort from '../component/Sort';
 
 const List = () => {
 
   return (
     <div className='list wrap'>
       <div className='sort-wrap'>
-        <ul>
-          <li>ACTION</li>
-          <li>ROMANCE</li>
-          <li>ACTION</li>
-        </ul>
+        <Sort />
       </div>
       <ul className='movie-list-box'>
         <li>

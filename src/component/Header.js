@@ -19,7 +19,7 @@ const Header = ({setSub}) => {
         </div>
       </nav>
       {/* <Search setSub={setSub} /> */}
-      <button type='button' className='list-btn' onClick={()=>{setSub('list')}}></button>
+      <button type='button' className='list-btn' onClick={()=>{navigate('/list')}}></button>
     </header>
   )
 }
