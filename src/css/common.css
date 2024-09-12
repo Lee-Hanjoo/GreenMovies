@@ -6,6 +6,26 @@
   height: 100vh;
   background-color: #000;
 }
+.rating-wrap {
+  display: flex;
+  align-items: flex-end;
+}
+.rating-wrap > p {
+  font-weight: 800;
+}
+.rating-wrap p:first-of-type {
+  font-size: 22px;
+  margin-right: 10px;
+}
+.rating-wrap p:last-of-type {
+  font-size: 26px;
+  color: #FFEC15;
+}
+.rating-wrap p:last-of-type span {
+  margin-left: 5px;
+  font-size: 16px;
+  font-weight: inherit;
+}
 
 /* HEADER 헤더 */
 .header {
@@ -27,6 +47,11 @@
   top: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+}
+.list-btn {
+  width: 32px;
+  height: 32px;
+  background: url('../../public/assets/imgs/icon/icon_list.svg') no-repeat center;
 }
 .search-box .search-input {
   transform: scaleX(0);
@@ -107,6 +132,9 @@
   background: url('../../public/assets/imgs/bg_dim.jpg') no-repeat center;
   z-index: 1;
 }
+.home .rating-wrap {
+  margin-bottom: 55px;
+}
 .play-btn {
   width: 130px;
   height: 130px;
@@ -114,10 +142,16 @@
   left: 50%;
   top: calc(50% - 120px);
   transform: translate(-50%, calc(-50%));
-  background: url('../../public/assets/imgs/icon/icon_play.svg') no-repeat center;
+  background: url('../../public/assets/imgs/icon/icon_play.svg') no-repeat center / 130px;
+  transition: all 0.3s;
+}
+.play-btn:hover {
+  background-size: 140px;
+  transition: all 0.3s;
 }
 .container {
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
   position: absolute;
   left: 150px;
@@ -138,6 +172,7 @@
   line-height: 95px;
 }
 .movie-info-wrap .desc {
+  margin-top: 55px;
   font-size: 20px;
   font-weight: 800;
   line-height: 30px;
@@ -147,7 +182,11 @@
   align-items: center;
   margin-bottom: 25px;
 }
-.genre-wrap .leng {
+.text-list {
+  display: flex;
+  align-items: center;
+}
+.text-list .leng {
   font-size: 16px;
   margin-left: 20px;
   padding: 3px 15px;
@@ -156,24 +195,27 @@
   font-weight: 800;
   border-radius: 999px;
 }
-.genre-list {
-  display: flex;
-  align-items: center;
-}
-.genre-list li {
+.text-list li {
   font-size: 22px;
   font-weight: 800;
 }
-.genre-list li:not(:first-of-type) {
+.text-list li span {
+  font-size: inherit;
+  font-weight: 500;
+}
+.text-list li:not(:first-of-type) {
   margin-left: 15px;
 }
-.genre-list li:not(:first-of-type)::before {
+.text-list li:not(:first-of-type)::before {
   content: '';
   display: inline-block;
   width: 2px;
   height: 16px;
   margin-right: 15px;
   background-color: #fff;
+}
+.text-list li.leng::before {
+  display: none;
 }
 
 /* RIGHT_SIDE TAB 오른쪽 탭 */
@@ -206,18 +248,23 @@
 .tab-cont > div {
   display: none;
 }
-.tab-cont .swiper-wrapper {
+.swiper:not(.trailer-list) .swiper-wrapper{
   padding-top: 60px;
   display: flex;
   align-items: center;
 }
-.tab-cont .swiper-slide {
+.swiper:not(.trailer-list) .swiper-slide {
   width: 130px !important;
-  cursor: pointer;
 }
-.tab-cont .swiper-slide img {
+.swiper .swiper-slide {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.swiper .swiper-slide:hover {
+  transform: translateY(-5px);
+}
+.swiper .swiper-slide img {
   margin-bottom: 15px;
-
 }
 .trend-list.on {
   display: block;
@@ -253,6 +300,18 @@
 }
 
 /* LIST 리스트 */
+.list {
+  padding-top: 150px;
+  display: flex;
+  justify-content: center;
+}
+.list .movie-list-box {
+  width: calc(100% - 16%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fff;
+}
 
 /* ERROR 에러페이지 */
 .error > div {
@@ -275,3 +334,59 @@
   border: 2px solid #fff;
   border-radius: 999px;
 }
+
+/* DETAIL 상세페이지 */
+.detail {
+  background: url('../../public/assets/imgs/bg.jpg') no-repeat center;
+}
+.detail .container {
+  align-items: flex-start;
+  flex-direction: column;
+  bottom: 80px;
+}
+.detail .movie-info-wrap .title {
+  min-height: auto;
+}
+.detail .side-menu-wrap {
+  position: absolute;
+  right: 150px;
+  top: calc(32%);
+  text-align: right;
+}
+.bottom-wrap {
+  margin-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bottom-wrap .label {
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.cast-wrap {
+  width: calc(100% - calc(58% - 7px));
+  position: relative;
+}
+.trailer-wrap {
+  width: calc(100% - 48%);
+  position: relative;
+}
+.trailer-list .swiper-wrapper {
+  padding-top: 60px;
+}
+.trailer-list .swiper-slide {
+  max-width: 347px !important;
+}
+.poster-btn {
+  margin-bottom: 10px;
+  padding: 9px 40px 9px 20px;
+  font-weight: 800;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: url('../../public/assets/imgs/icon/icon_arrow_link.svg') no-repeat center right 20px;
+}
+

@@ -60,6 +60,7 @@ button, input[type=button] {
   vertical-align: middle;
   cursor: pointer;
   background: transparent;
+  font-family: "Manrope", sans-serif !important;
 }
 
 input, select, button, textarea {

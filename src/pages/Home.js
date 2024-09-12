@@ -1,9 +1,12 @@
 import React, { useRef, useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link } from 'react-router-dom'
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import MovieItem from '../component/MovieItem';
+import Rating from '../component/Rating';
+import TextList from '../component/TextList';
 
 const Home = ({nav}) => {
 
@@ -16,15 +19,13 @@ const Home = ({nav}) => {
       </Link>
       <div className='container'>
         <div className='movie-info-wrap'>
-          <div className='genre-wrap'>
-            <ul className='genre-list'>
-              <li>Action</li>
-              <li>Crime</li>
-              <li>Thriller</li>
-              <li>Comedy</li>
-            </ul>
-            <div className='leng'>EN</div>
-          </div>
+          <Rating />
+          <TextList leng='EN'>
+            <li>Action</li>
+            <li>Crime</li>
+            <li>Thriller</li>
+            <li>Comedy</li>
+          </TextList>
           <h2 className='title'>Bad Boys: Ride or Die</h2>
           <p className='desc'>After their late former Captain is framed, Lowrey and Burnett try to clear his name,
   only to end up on the run themselves.</p>
@@ -43,28 +44,22 @@ const Home = ({nav}) => {
               className={`swiper trend-list ${tab === 'trend' ? 'on': ''}`}
             >
               <SwiperSlide>
-                <img src={`${process.env.PUBLIC_URL}/assets/imgs/movie_01.jpg`} alt='' />
-                <p className='title'>Borderlands11</p>
+                <MovieItem />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={`${process.env.PUBLIC_URL}/assets/imgs/movie_01.jpg`} alt='' />
-                <p className='title'>Borderlands11</p>
+                <MovieItem />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={`${process.env.PUBLIC_URL}/assets/imgs/movie_01.jpg`} alt='' />
-                <p className='title'>Borderlands11</p>
+                <MovieItem />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={`${process.env.PUBLIC_URL}/assets/imgs/movie_01.jpg`} alt='' />
-                <p className='title'>Borderlands11</p>
+                <MovieItem />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={`${process.env.PUBLIC_URL}/assets/imgs/movie_01.jpg`} alt='' />
-                <p className='title'>Borderlands11</p>
+                <MovieItem />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={`${process.env.PUBLIC_URL}/assets/imgs/movie_01.jpg`} alt='' />
-                <p className='title'>Borderlands11</p>
+                <MovieItem />
               </SwiperSlide>
             </Swiper>
             <Swiper 
@@ -75,28 +70,22 @@ const Home = ({nav}) => {
               className={`swiper top-list ${tab === 'top' ? 'on': ''}`}
             >
               <SwiperSlide>
-                <img src={`${process.env.PUBLIC_URL}/assets/imgs/movie_01.jpg`} alt='' />
-                <p className='title'>Borderlands22</p>
+                <MovieItem />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={`${process.env.PUBLIC_URL}/assets/imgs/movie_01.jpg`} alt='' />
-                <p className='title'>Borderlands22</p>
+                <MovieItem />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={`${process.env.PUBLIC_URL}/assets/imgs/movie_01.jpg`} alt='' />
-                <p className='title'>Borderlands22</p>
+                <MovieItem />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={`${process.env.PUBLIC_URL}/assets/imgs/movie_01.jpg`} alt='' />
-                <p className='title'>Borderlands22</p>
+                <MovieItem />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={`${process.env.PUBLIC_URL}/assets/imgs/movie_01.jpg`} alt='' />
-                <p className='title'>Borderlands22</p>
+                <MovieItem />
               </SwiperSlide>
               <SwiperSlide>
-                <img src={`${process.env.PUBLIC_URL}/assets/imgs/movie_01.jpg`} alt='' />
-                <p className='title'>Borderlands22</p>
+                <MovieItem />
               </SwiperSlide>
             </Swiper>
           </div>

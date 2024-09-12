@@ -18,7 +18,8 @@ const Header = ({setSub}) => {
           <Link className='tv' to='/' onClick={()=>{setSub('tv')}}>TV Series</Link>
         </div>
       </nav>
-      <Search setSub={setSub} />
+      {/* <Search setSub={setSub} /> */}
+      <button type='button' className='list-btn' onClick={()=>{setSub('list')}}></button>
     </header>
   )
 }
