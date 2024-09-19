@@ -2,8 +2,22 @@ import React, { useEffect, useRef, useState } from 'react'
 import MovieItem from '../component/MovieItem';
 import Sort from '../component/Sort';
 import Search from '../component/Search';
+import store from '../state/store';
 
-const List = ({movies}) => {
+const List = () => {
+
+  let {dataCtrl,list} = store();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await dataCtrl({t:'list'});  
+    };
+    
+    fetchData();
+  }, [dataCtrl]);
+
+  let movies = list;
+  
 
   return (
     <div className='list wrap'>
@@ -17,7 +31,7 @@ const List = ({movies}) => {
       <ul className='movie-list-box'>
         {movies.map((movie, i) => (
           <li key={i}>
-            <MovieItem title={movie.original_title} bg={movie.backdrop_path} poster={movie.poster_path}/>
+            <MovieItem title={movie.original_title} poster={movie.poster_path}/>
           </li>
         ))}
       </ul>

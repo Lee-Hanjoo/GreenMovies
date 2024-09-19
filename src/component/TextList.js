@@ -7,8 +7,8 @@ const TextList = (props) => {
         <ul className='text-list'>
           {props.children}
           {
-            props.leng ? 
-            <li className='leng'>EN</li>
+            props.lang ? 
+            <li className='lang'>{props.lang}</li>
             :
             <></>
           }

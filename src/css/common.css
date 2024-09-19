@@ -227,7 +227,7 @@
   display: flex;
   align-items: center;
 }
-.text-list .leng {
+.text-list .lang {
   font-size: 16px;
   margin-left: 20px;
   padding: 3px 15px;
@@ -235,6 +235,7 @@
   color: #222;
   font-weight: 800;
   border-radius: 999px;
+  text-transform: uppercase;
 }
 .text-list li {
   font-size: 22px;
@@ -255,7 +256,7 @@
   margin-right: 15px;
   background-color: #fff;
 }
-.text-list li.leng::before {
+.text-list li.lang::before {
   display: none;
 }
 
@@ -389,9 +390,11 @@
 
 /* DETAIL 상세페이지 */
 .detail {
+  width: 100%;
   background: url('../../public/assets/imgs/bg.jpg') no-repeat center;
 }
 .detail .container {
+  width: 100%;
   align-items: flex-start;
   flex-direction: column;
   bottom: 80px;
@@ -406,6 +409,7 @@
   text-align: right;
 }
 .bottom-wrap {
+  width: 100%;
   margin-top: 80px;
   display: flex;
   align-items: center;

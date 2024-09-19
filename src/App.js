@@ -14,15 +14,15 @@ function App() {
 
   let {dataCtrl} = store();
 
-  const [movies, setMovies] = useState([]);
+  // const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await dataCtrl();  // dataCtrl을 호출해서 데이터를 받아옴
-      setMovies(res.data.results);   // 받아온 데이터 중에서 results 배열을 상태에 저장
+      const res = await dataCtrl({t:'all'});  
+      // setMovies(res.data.results);
     };
     
-    fetchData();  // 컴포넌트가 렌더링될 때 fetchData 실행
+    fetchData();
   }, [dataCtrl]);
   
 
@@ -31,9 +31,9 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path='/' element={<Home movies={movies} />}/>
-          <Route path='/detail' element={<Detail movies={movies}/>}/>
-          <Route path='/list' element={<List movies={movies} />}/>
+          <Route path='/' element={<Home />}/>
+          <Route path='/detail' element={<Detail />}/>
+          <Route path='/list' element={<List  />}/>
           <Route path='/*' element={<Error />}/>
         </Routes>
       </Router>

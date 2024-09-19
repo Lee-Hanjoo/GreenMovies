@@ -8,14 +8,14 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import Poster from '../component/Poster';
 
-const Detail = () => {
+const Detail = ({movies}) => {
 
   return (
     <div className='detail wrap'>
       <div className='container'>
         <div className='movie-info-wrap'>
           <div className='genre-wrap'>
-            <TextList leng='EN'>
+            <TextList lang='EN'>
               <li>Action</li>
               <li>Crime</li>
               <li>Thriller</li>
@@ -37,7 +37,7 @@ const Detail = () => {
         </div>
         <div className='bottom-wrap'>
           <div className='cast-wrap'>
-            <p className='label'>trailer</p>
+            <p className='label'>cast</p>
             <Swiper 
               navigation={true} 
               modules={[Navigation]} 
@@ -45,24 +45,11 @@ const Detail = () => {
               spaceBetween={25}
               className={`swiper cast-list`}
             >
-              <SwiperSlide>
-                <MovieItem />
-              </SwiperSlide>
-              <SwiperSlide>
-                <MovieItem />
-              </SwiperSlide>
-              <SwiperSlide>
-                <MovieItem />
-              </SwiperSlide>
-              <SwiperSlide>
-                <MovieItem />
-              </SwiperSlide>
-              <SwiperSlide>
-                <MovieItem />
-              </SwiperSlide>
-              <SwiperSlide>
-                <MovieItem />
-              </SwiperSlide>
+              {movies.map((movie, i) => (
+                <SwiperSlide key={movie.id}>
+                  <MovieItem title={movie.original_title} poster={movie.poster_path}/>
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
           <div className='trailer-wrap'>
@@ -72,24 +59,11 @@ const Detail = () => {
               spaceBetween={25}
               className={`swiper trailer-list`}
             >
-              <SwiperSlide>
-                <MovieItem trailer />
-              </SwiperSlide>
-              <SwiperSlide>
-                <MovieItem trailer />
-              </SwiperSlide>
-              <SwiperSlide>
-                <MovieItem trailer />
-              </SwiperSlide>
-              <SwiperSlide>
-                <MovieItem trailer />
-              </SwiperSlide>
-              <SwiperSlide>
-                <MovieItem trailer />
-              </SwiperSlide>
-              <SwiperSlide>
-                <MovieItem trailer />
-              </SwiperSlide>
+              {movies.map((movie, i) => (
+                <SwiperSlide key={movie.id}>
+                  <MovieItem trailer title={movie.original_title} poster={movie.poster_path}/>
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
         </div>
