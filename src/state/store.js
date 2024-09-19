@@ -13,7 +13,7 @@ const store = create((set) => ({
   dataCtrl:async (a)=>{ 
     let res;
     switch(a.t){
-      case 'search':  break;
+      // case 'search':  break;
       case 'list' : res = await api.list(); set({list:res});
       break;
 

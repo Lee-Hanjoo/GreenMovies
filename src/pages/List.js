@@ -6,7 +6,7 @@ import store from '../state/store';
 
 const List = () => {
 
-  let {dataCtrl,list} = store();
+  let {dataCtrl, list} = store();
 
   useEffect(() => {
     const fetchData = async () => {

@@ -10,17 +10,21 @@ import TextList from '../component/TextList';
 import store from '../state/store';
 
 const Home = () => {
-  const {main,myState} = store();
+  const {dataCtrl, main, myState} = store();
   const [loading, setLoading] = useState(true); // 로딩 상태 추가
   const [tab, setTab] = useState('trend');
   const [movies, setMovies] = useState([]);
   const bgUrl = 'https://image.tmdb.org/t/p/original/'
   
   useEffect(() => {
+    const fetchData = async () => {
+      const res = await dataCtrl({t:'main'});  
+    };
     if (main.movieTreding) {
       setLoading(false); // movies 배열이 채워지면 로딩 완료
       setMovies((myState === 'tv') ? main.tvTreding :  main.movieTreding)
     }
+    fetchData();
   }, [main]);
 
 
@@ -28,7 +32,6 @@ const Home = () => {
     return <div>Loading...</div>; // 로딩 스피너나 메시지 표시
   }
   
-
 
   return (
     <div className='home wrap' style={{backgroundImage: `url(${bgUrl}${movies[0].backdrop_path})`}}>
