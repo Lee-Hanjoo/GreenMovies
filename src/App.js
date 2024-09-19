@@ -5,22 +5,35 @@ import '../src/css/common.css';
 import Header from './component/Header';
 import Home from './pages/Home';
 import Detail from './pages/Detail';
-import {  useEffect, useState } from 'react';
 import List from './pages/List';
 import Error from './pages/Error';
+import store from './state/store'
+import { useEffect, useState } from 'react';
 
 function App() {
 
-  const [sub, setSub] = useState('home')
+  let {dataCtrl} = store();
+
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await dataCtrl();  // dataCtrl을 호출해서 데이터를 받아옴
+      setMovies(res.data.results);   // 받아온 데이터 중에서 results 배열을 상태에 저장
+    };
+    
+    fetchData();  // 컴포넌트가 렌더링될 때 fetchData 실행
+  }, [dataCtrl]);
+  
 
   return (
     <div className='main'>
       <Router>
-        <Header setSub={setSub}/>
+        <Header />
         <Routes>
-          <Route path='/' element={<Home sub={sub} />}/>
-          <Route path='/detail' element={<Detail />}/>
-          <Route path='/list' element={<List sub={sub} />}/>
+          <Route path='/' element={<Home movies={movies} />}/>
+          <Route path='/detail' element={<Detail movies={movies}/>}/>
+          <Route path='/list' element={<List movies={movies} />}/>
           <Route path='/*' element={<Error />}/>
         </Routes>
       </Router>

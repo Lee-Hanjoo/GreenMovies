@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 
 const Sort = (props) => {
-  const [on, setOn] = useState('action')
+  const [on, setOn] = useState(0)
   return (
     <ul className={`sort-list ${props.chk ? 'chk-type' : ''}`}>
-      <li className={`${on === 'action' ? 'on' : ''}`} onClick={()=>{setOn('action')}}>ACTION</li>
-      <li className={`${on === 'romance' ? 'on' : ''}`} onClick={()=>{setOn('romance')}}>ROMANCE</li>
-      <li className={`${on === 'comedy' ? 'on' : ''}`} onClick={()=>{setOn('comedy')}}>COMEDY</li>
+      {
+        props.list.map((v,i)=>{
+          return (
+            <li key={i} className={`${on === i ? 'on' : ''}`} onClick={()=>{setOn(i)}}>{v}</li>
+          )
+        })
+      }
     </ul>
   )
 }

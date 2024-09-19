@@ -1,24 +1,25 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import MovieItem from '../component/MovieItem';
 import Sort from '../component/Sort';
+import Search from '../component/Search';
 
-const List = () => {
+const List = ({movies}) => {
 
   return (
     <div className='list wrap'>
-      <div className='sort-wrap'>
-        <Sort />
+      <div className={`list-top-wrap`}>
+        <div className='sort-wrap'>
+          <Sort list={['action','romance','comedy']}/>
+          <Sort chk list={['en','fr','ko']}/>
+        </div>
+        <Search />
       </div>
       <ul className='movie-list-box'>
-        <li>
-          <MovieItem />
-        </li>
-        <li>
-          <MovieItem />
-        </li>
-        <li>
-          <MovieItem />
-        </li>
+        {movies.map((movie, i) => (
+          <li key={i}>
+            <MovieItem title={movie.original_title} bg={movie.backdrop_path} poster={movie.poster_path}/>
+          </li>
+        ))}
       </ul>
     </div>
   )

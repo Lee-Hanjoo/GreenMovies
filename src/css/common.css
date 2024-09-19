@@ -40,13 +40,16 @@
   z-index: 100;
 }
 .header .logo {
-  font-size: 22px;
-  font-weight: 700;
+  width: 100px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+  font-size: 22px;
+  font-weight: 700;
+  /* background: url('../../public/assets/imgs/logo.svg') no-repeat center / 32px; */
+  /* text-indent: -9999px; */
 }
 .list-btn {
   width: 32px;
@@ -88,6 +91,25 @@
   height: 32px;
   background: url('../../public/assets/imgs/icon/icon_search.svg') no-repeat center;
 }
+.nav {
+  width: 32px;
+  height: 32px;
+}
+.nav .dim {
+  visibility: hidden;
+  opacity: 0;
+}
+.nav.on .dim {
+  width: 100%;
+  height: 100vh;
+  background-color: transparent;
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+}
 .nav .nav-btn {
   width: 32px;
   height: 32px;
@@ -95,7 +117,7 @@
   position: fixed;
   z-index: 2;
 }
-.nav > div {
+.nav .nav-list {
   opacity: 0;
   visibility: hidden;
   width: 300px;
@@ -109,21 +131,21 @@
   box-shadow: 4px 4px 16px rgba(0,0,0,0.4);
   transition: all 0.3s;
 }
-.nav > div a {
+.nav .nav-list a {
   position: absolute;
   left: 50px;
   top: 232px;
   font-size: 22px;
   font-weight: 600;
 }
-.nav > div a:nth-of-type(2) {
+.nav .nav-list a:nth-of-type(2) {
   top: 292px;
 }
-.nav > div a:nth-of-type(3) {
+.nav .nav-list a:nth-of-type(3) {
   top: 352px;
 }
 
-.nav.on > div{
+.nav.on .nav-list{
   opacity: 1;
   visibility: visible;
   margin-left:0;
@@ -173,12 +195,13 @@
   justify-content: space-between;
   position: absolute;
   left: 150px;
-  bottom: 150px;
+  bottom: 80px;
   z-index: 2;
 }
 /* LEFT_SIDE INFO 영화 정보 */
 .movie-info-wrap {
   max-width: 820px;
+  margin-bottom: 30px;
 
 }
 .movie-info-wrap .title {
@@ -263,9 +286,6 @@
 .tab li:not(:first-of-type) {
   margin-left: 25px;
 }
-.tab-cont > div {
-  display: none;
-}
 .swiper:not(.trailer-list) .swiper-wrapper{
   padding-top: 60px;
   display: flex;
@@ -280,15 +300,6 @@
 }
 .swiper .swiper-slide:hover {
   transform: translateY(-5px);
-}
-.swiper .swiper-slide img {
-  margin-bottom: 15px;
-}
-.trend-list.on {
-  display: block;
-}
-.top-list.on {
-  display: block;
 }
 
 .swiper-button-prev {
@@ -319,14 +330,39 @@
 
 /* LIST 리스트 */
 .list {
-  padding-top: 150px;
+  padding: 150px 150px 0 150px;
 }
-.list .movie-list-box {
-  width: calc(100% - 16%);
+.list-top-wrap {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border: 1px solid #fff;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+.list .movie-list-box {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.list .movie-list-box li {
+  width: calc((100% / 6) - 20px);
+  min-width: 144px;
+  cursor: pointer;
+}
+.list .movie-list-box li {
+  margin-left: 24px;
+}
+.list .movie-list-box li:nth-child(6n+1) {
+  margin-left: 0;
+}
+.list .movie-list-box li:nth-child(n+7) {
+  margin-top: 50px;
+}
+.movie-item .title {
+  margin-top: 15px;
+  height: 54px;
 }
 
 /* ERROR 에러페이지 */
@@ -405,6 +441,10 @@
   border-radius: 999px;
   background: url('../../public/assets/imgs/icon/icon_arrow_link.svg') no-repeat center right 20px;
 }
+.sort-wrap {
+  display: flex;
+  align-items: center;
+}
 .sort-list {
   width: fit-content;
   display: flex;
@@ -413,9 +453,13 @@
   border: 2px solid #fff;
   border-radius: 999px;
 }
+.sort-list + .sort-list {
+  margin-left: 25px;
+}
 .sort-list li {
   font-weight: 800;
   cursor: pointer;
+  text-transform: uppercase;
 }
 .sort-list li:not(:first-of-type) {
   margin-left: 15px;
@@ -426,4 +470,39 @@
   color: #222;
   border-radius: 999px;
 }
-/* sort-list li에 패딩값..부터 하면 됨 */
+.sort-list li:first-of-type {
+  margin-left: 15px;
+}
+.sort-list li:first-of-type.on {
+  margin-left: 0;
+}
+.sort-list li:nth-of-type(2).on {
+  padding: 3px 10px;
+  margin-left: 13px;
+}
+.sort-list li:nth-of-type(2).on + li {
+  margin-left: 12px;
+}
+.sort-list li:last-of-type {
+  margin-right: 15px;
+}
+.sort-list li:last-of-type.on {
+  margin-right: 0;
+}
+.sort-list.chk-type {
+  padding: 0;
+  border: none;
+}
+.sort-list.chk-type li {
+  margin: 0 !important;
+  padding: 7px 15px 7px 30px !important;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: transparent url('../../public/assets/imgs/icon/icon_chk.svg') no-repeat left 10px center;
+}
+.sort-list.chk-type li:not(:first-of-type) {
+  margin-left: 10px !important;
+}
+.sort-list.chk-type li.on {
+  background: #fff url('../../public/assets/imgs/icon/icon_chk_on.svg') no-repeat left 10px center;
+}
