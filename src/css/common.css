@@ -39,18 +39,59 @@
   justify-content: space-between;
   z-index: 100;
 }
-.header .logo {
-  width: 100px;
+.header .main-sort {
+  padding: 0 4px;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
-  font-size: 22px;
-  font-weight: 700;
-  /* background: url('../../public/assets/imgs/logo.svg') no-repeat center / 32px; */
-  /* text-indent: -9999px; */
+  border: 2px solid #fff;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
+.switch label{
+  display:block; 
+  position:relative; 
+  width:fit-content; 
+  height:32px;
+  padding: 0 15px 0 32px;
+  line-height: 32px;
+  background:transparent; 
+  border-radius:999px; 
+  transition:0.21s;
+  cursor:pointer;
+}
+.switch label:after{
+  content:''; 
+  display:block; 
+  position:absolute; 
+  top:50%; 
+  right:75px; 
+  transform: translateY(-50%); 
+  width:24px;  
+  height:24px;
+  background:#fff; 
+  border-radius:50%; 
+  transition: 0.3s;
+}
+.switch input:checked + label{
+  padding: 0 32px 0 15px;
+}
+.switch input:checked + label:after{
+  right: 0px;
+}
+.switch + p {
+  margin-left:8px; 
+  color:#707070; 
+  line-height:32px; 
+  text-transform: uppercase;
+}
+
+
+
 .list-btn {
   width: 32px;
   height: 32px;
