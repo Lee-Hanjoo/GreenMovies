@@ -15,6 +15,7 @@ import { api } from '../api/tmdb';
 
 const Home = () => {
   const {dataCtrl, main, myState, setMain, storeMovieIdx, setStoreMovieIdx} = store();
+  const [swiperInstance, setSwiperInstance] = useState(null);
   const [loading, setLoading] = useState(false); // 로딩 상태 추가
   const [tab, setTab] = useState('trend');
   const [movies, setMovies] = useState([]);
@@ -43,9 +44,6 @@ const Home = () => {
       const res = await api.all()
 
       setMain(res)
-      if (res.movieTreding) {
-        setMovies((myState === 'tv') ? res.tvTreding :  res.movieTreding)
-      }
       
       setLoading(false); // movies 배열이 채워지면 로딩 완료
     
@@ -54,7 +52,36 @@ const Home = () => {
   useEffect(() => {
     getMovieTvData()
   }, [])
+
+  useEffect(()=>{
+
+    if(!main) return;
+
+    if(myState === 'tv') {
+      // tv일때~ tv만을 위한 곳 tv의 트렌드 부터 시작
+      if(tab === 'trend') {
+        setMovies(main.tvTreding)
+      } else {
+        setMovies(main.tvToprated)
+      }
+    } else {
+      // movie!! 
+      if(tab === 'trend') {
+        setMovies(main.movieTreding)
+      } else {
+        setMovies(main.movieToprated)
+      }
+    }
+  },[myState, main, tab])
   /* 인수 */
+
+  const goToFirstSlide = () => {
+    // 첫 번째 슬라이드로 이동
+    if (swiperInstance) {
+      swiperInstance.slideTo(0); // 인덱스 0: 첫 번째 슬라이드
+    }
+  };
+
 
 
 
@@ -63,7 +90,7 @@ const Home = () => {
   }
   
 
-  if(!movies.length) return
+  if(!movies?.length) return
 
   return (
     <div className='home wrap' style={{backgroundImage: `url(${bgUrl}${movies[storeMovieIdx].backdrop_path})`}}>
@@ -83,51 +110,42 @@ const Home = () => {
         </div>
         <div className='tab-wrap'>
           <ul className='tab'>
-            <li className={`${tab === 'trend' ? 'on': ''}`} onClick={()=>{setTab('trend')}}>TRENDING</li>
-            <li className={`${tab === 'top' ? 'on': ''}`} onClick={()=>{setTab('top')}}>TOP RATED</li>
+            <li className={`${tab === 'trend' ? 'on': ''}`} 
+              onClick={()=>{
+                setTab('trend');
+                setStoreMovieIdx(0);
+                goToFirstSlide()
+              }
+            }
+            >TRENDING</li>
+            <li className={`${tab === 'top' ? 'on': ''}`}
+              onClick={()=>{
+                setTab('top');
+                setStoreMovieIdx(0)
+                goToFirstSlide()
+              }
+            }
+            >TOP RATED</li>
           </ul>
           <div className='tab-cont'>
-            {
-              tab === 'trend' ?
-                <Swiper
-                  initialSlide={storeMovieIdx}
-                  navigation={true} 
-                  modules={[Navigation]} 
-                  slidesPerView={'auto'}
-                  spaceBetween={25}
-                  onSlideChange={(v) => {
-                    // setMovieIdx(v.activeIndex)
-                    setStoreMovieIdx(v.activeIndex)
-                  }}
-                  className={`swiper ${tab === 'trend' ? 'trend-list': ''}`}
-                >
-                  {movies.map((movie, i) => (
-                    <SwiperSlide key={movie.id}>
-                      <MovieItem title={movie.original_title} poster={movie.poster_path}/>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-                :
-                <></>
-            }
-            {
-              tab === 'top' ?
-                <Swiper 
-                  navigation={true} 
-                  modules={[Navigation]} 
-                  slidesPerView={'auto'}
-                  spaceBetween={25}
-                  className={`swiper ${tab === 'top' ? 'top-list': ''}`}
-                >
-                  {movies.map((movie, i) => (
-                    <SwiperSlide key={movie.id}>
-                      <MovieItem title={movie.original_title} poster={movie.poster_path}/>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-                :
-                <></>
-            }
+            <Swiper
+              onSwiper={setSwiperInstance}
+              initialSlide={storeMovieIdx}
+              navigation={true} 
+              modules={[Navigation]} 
+              slidesPerView={'auto'}
+              spaceBetween={25}
+              onSlideChange={(v) => {
+                setStoreMovieIdx(v.activeIndex)
+              }}
+              className={`swiper`}
+            >
+              {movies.map((movie, i) => (
+                <SwiperSlide key={movie.id}>
+                  <MovieItem title={movie.original_title} poster={movie.poster_path}/>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </div>

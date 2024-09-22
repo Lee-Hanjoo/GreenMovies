@@ -210,7 +210,7 @@
 
 /* HOME 홈 */
 .home.wrap {
-  background: url('../../public/assets/imgs/bg.jpg') no-repeat center;
+  background: url('../../public/assets/imgs/bg.jpg') no-repeat center / cover;
   position: relative;
 }
 .home.wrap::after {
@@ -243,6 +243,7 @@
   transition: all 0.3s;
 }
 .container {
+  width: calc(100% - 150px);
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
