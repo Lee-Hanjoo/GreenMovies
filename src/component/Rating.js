@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import store from '../state/store';
 
 const Rating = ({movies}) => {
 
-  const voteAverage = movies[0].vote_average.toFixed(1);
+  const {main, storeMovieIdx} = store();
+  const voteAverage = main?.movieTreding[storeMovieIdx]?.vote_average.toFixed(1);
+
+  useEffect(() => {
+    console.log(`storeMovieIdx`, storeMovieIdx)
+  }, [storeMovieIdx])
 
   return (
     <div className='rating-wrap'>

@@ -7,8 +7,10 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Poster from '../component/Poster';
+import store from '../state/store';
 
 const Detail = ({movies}) => {
+  const {main} = store();
 
   return (
     <div className='detail wrap'>
@@ -45,7 +47,7 @@ const Detail = ({movies}) => {
               spaceBetween={25}
               className={`swiper cast-list`}
             >
-              {movies.map((movie, i) => (
+              {main?.movieTreding?.map((movie, i) => (
                 <SwiperSlide key={movie.id}>
                   <MovieItem title={movie.original_title} poster={movie.poster_path}/>
                 </SwiperSlide>
@@ -59,7 +61,7 @@ const Detail = ({movies}) => {
               spaceBetween={25}
               className={`swiper trailer-list`}
             >
-              {movies.map((movie, i) => (
+              {main?.movieTreding?.map((movie, i) => (
                 <SwiperSlide key={movie.id}>
                   <MovieItem trailer title={movie.original_title} poster={movie.poster_path}/>
                 </SwiperSlide>

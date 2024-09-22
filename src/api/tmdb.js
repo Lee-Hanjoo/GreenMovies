@@ -28,7 +28,6 @@ export const api = {
       params:{
         with_genres:10749,
         with_original_language:'en',
-        bgBaseURL: 'https://image.tmdb.org/t/p/original/',
       }
     });
     return res.data.results;

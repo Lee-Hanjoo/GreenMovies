@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <header className='header'>
-      <div className={`main-sort ${mainSort === 'movie' ? 'movie' : 'tv'}`}>
+      {/* <div className={`main-sort ${mainSort === 'movie' ? 'movie' : 'tv'}`}>
         <div className="switch">
 				  <input type="checkbox" id="switch_input" />
 				  <label for="switch_input" onClick={()=>{stateChange(cont); setMainSort(!mainSort)}}>
@@ -28,8 +28,8 @@ const Header = () => {
             <i></i>
           </label>
 				</div>
-      </div>
-      {/* <h1 className='logo' onClick={()=>{navigate('/'); stateChange('movie')}}>LOGO</h1> */}
+      </div> */}
+      <h1 className='logo' onClick={()=>{navigate('/'); stateChange('movie')}}>LOGO</h1>
       <nav className={`nav ${nav ? 'on' : ''}`}>
         <div className='dim' onClick={()=>{setNav(false)}}></div>
         <button type='button' className='nav-btn' onClick={()=>{setNav(!nav)}}/>
