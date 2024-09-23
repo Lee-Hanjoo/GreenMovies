@@ -23,9 +23,7 @@ const store = create((set) => ({
     
   },
 
-  /* 인수 */
-  setMain: (newBears) => set({ main: newBears }),
-  /* 인수 */
+  setMain: (newData) => set({ main: newData }),
 
   storeMovieIdx: 0,
   setStoreMovieIdx:(idx) => set({ storeMovieIdx: idx })

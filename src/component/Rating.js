@@ -4,10 +4,9 @@ import store from '../state/store';
 const Rating = ({movies}) => {
 
   const {main, storeMovieIdx} = store();
-  const voteAverage = main?.movieTreding[storeMovieIdx]?.vote_average.toFixed(1);
+  const voteAverage = main?.movieTrending[storeMovieIdx]?.vote_average.toFixed(1);
 
   useEffect(() => {
-    console.log(`storeMovieIdx`, storeMovieIdx)
   }, [storeMovieIdx])
 
   return (

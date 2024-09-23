@@ -13,15 +13,23 @@ export const api = {
       instance.get('/movie/popular'), 
       instance.get('/movie/top_rated'), 
       instance.get('/tv/popular'), 
-      instance.get('/tv/top_rated')
+      instance.get('/tv/top_rated'),
     ]
-    let [movieTreding,movieToprated,tvTreding,tvToprated] = await Promise.all(url); 
-    movieTreding = movieTreding.data.results;
+    let [movieTrending,movieToprated,tvTrending,tvToprated] = await Promise.all(url); 
+    movieTrending = movieTrending.data.results;
     movieToprated = movieToprated.data.results;
-    tvTreding = tvTreding.data.results;
+    tvTrending = tvTrending.data.results;
     tvToprated = tvToprated.data.results;
 
-    return {movieTreding,movieToprated,tvTreding,tvToprated};
+    return {movieTrending,movieToprated,tvTrending,tvToprated};
+  },
+  video:async ()=>{
+    const res = await instance.get('/movie',{
+      params:{
+        movie_id:10749
+      }
+    });
+    return res.data.results;
   },
   list:async ()=>{
     const res = await instance.get('/discover/movie',{
