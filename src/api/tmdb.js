@@ -23,13 +23,14 @@ export const api = {
 
     return {movieTrending,movieToprated,tvTrending,tvToprated};
   },
-  video:async ()=>{
-    const res = await instance.get('/movie',{
+  
+  detail:async (t,id)=>{
+    const res = await instance.get(`/${t}/${id}`, {
       params:{
-        movie_id:10749
+        append_to_response: 'videos,images,casts'
       }
     });
-    return res.data.results;
+    return res.data;
   },
   list:async ()=>{
     const res = await instance.get('/discover/movie',{

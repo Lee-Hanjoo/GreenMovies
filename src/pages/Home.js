@@ -6,12 +6,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { api } from '../api/tmdb';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 
-  const {main, setMain, setStoreMovieIdx, storeMovieIdx} = store();
+  const {main, setMain, setStoreMovieIdx, storeMovieIdx, stateChange} = store();
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const getMovieTvData = async () => {
     const res = await api.all()
@@ -23,7 +25,6 @@ const Home = () => {
     getMovieTvData()
   }, [])
 
-  console.log(main);
   
   useEffect(()=>{
 
@@ -38,7 +39,6 @@ const Home = () => {
   return (
     <div className='home wrap'>
       <div className='video'>
-        video
       </div>
       <div className='container'>
         <div className='cont-box'>
@@ -66,8 +66,13 @@ const Home = () => {
             className={`swiper`}
           >
             {main?.movieTrending?.map((movie, i) => 
-              <SwiperSlide key={movie.id}>
-                <MovieItem title={movie.original_title} poster={movie.poster_path}/>
+              <SwiperSlide key={movie.id} 
+                onClick={()=>{
+                  navigate(`/detail/${movie.id}`);
+                  stateChange('movie');
+                }}
+              >
+                <MovieItem title={movie.title} poster={movie.poster_path}/>
               </SwiperSlide>
             )}
           </Swiper>
@@ -97,8 +102,13 @@ const Home = () => {
             className={`swiper`}
           >
             {main?.movieToprated?.map((movie, i) => (
-              <SwiperSlide key={movie.id}>
-                <MovieItem title={movie.original_title} poster={movie.poster_path}/>
+              <SwiperSlide key={movie.id} 
+                onClick={()=>{
+                  navigate(`/detail/${movie.id}`);
+                  stateChange('movie');
+                }}
+              >
+                <MovieItem title={movie.title} poster={movie.poster_path}/>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -128,7 +138,12 @@ const Home = () => {
             className={`swiper`}
           >
             {main?.tvTrending?.map((tv, i) => (
-              <SwiperSlide key={tv.id}>
+              <SwiperSlide key={tv.id}
+                onClick={()=>{
+                  navigate(`/detail/${tv.id}`);
+                  stateChange('tv');
+                }}
+              >
                 <MovieItem title={tv.name} poster={tv.poster_path}/>
               </SwiperSlide>
             ))}
@@ -159,7 +174,12 @@ const Home = () => {
             className={`swiper`}
           >
             {main?.tvToprated?.map((tv, i) => (
-              <SwiperSlide key={tv.id}>
+              <SwiperSlide key={tv.id}
+                onClick={()=>{
+                  navigate(`/detail/${tv.id}`);
+                  stateChange('tv');
+                }}
+              >
                 <MovieItem title={tv.name} poster={tv.poster_path}/>
               </SwiperSlide>
             ))}

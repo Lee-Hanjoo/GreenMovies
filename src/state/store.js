@@ -26,7 +26,8 @@ const store = create((set) => ({
   setMain: (newData) => set({ main: newData }),
 
   storeMovieIdx: 0,
-  setStoreMovieIdx:(idx) => set({ storeMovieIdx: idx })
+  setStoreMovieIdx:(idx) => set({ storeMovieIdx: idx }),
+
 }))
 
 export default store

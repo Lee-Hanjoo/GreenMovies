@@ -31,7 +31,7 @@ const SearchList = () => {
       <ul className='movie-list-box'>
         {movies.map((movie, i) => (
           <li key={i}>
-            <MovieItem title={movie.original_title} poster={movie.poster_path}/>
+            <MovieItem title={movie.title} poster={movie.poster_path}/>
           </li>
         ))}
       </ul>

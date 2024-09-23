@@ -35,7 +35,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/list' element={<List tab={tab} setTab={setTab} />}/>
-          <Route path='/detail' element={<Detail />}/>
+          <Route path='/detail/:id' element={<Detail />}/>
           <Route path='/search' element={<SearchList  />}/>
           <Route path='/*' element={<Error />}/>
         </Routes>

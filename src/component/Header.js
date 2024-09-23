@@ -7,9 +7,18 @@ const Header = ({tab, setTab}) => {
   const { stateChange } = store();
   const [nav, setNav] = useState(false)
   const navigate = useNavigate();
+  const [headerHidden, setHeaderHidden] = useState(false);
+
+  window.addEventListener("scroll", ()=>{
+    if(window.scrollY > 470) {
+      setHeaderHidden(true);
+    } else {
+      setHeaderHidden(false)
+    }
+  })
 
   return (
-    <header className='header'>
+    <header className={`header ${headerHidden ? 'hidden' : ''}`}>
       <h1 className='logo' onClick={()=>{navigate('/'); stateChange('movie')}}>LOGO</h1>
       <nav className={`nav ${nav ? 'on' : ''}`}>
         <div className='dim' onClick={()=>{setNav(false)}}></div>

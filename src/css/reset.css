@@ -160,3 +160,7 @@ a:link, a:visited, a:hover, a:active {
 * {
   box-sizing: border-box;
 }
+
+*::-webkit-scrollbar {
+  display: none;
+}

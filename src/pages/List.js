@@ -9,14 +9,12 @@ import Rating from '../component/Rating';
 import TextList from '../component/TextList';
 import store from '../state/store';
 
-/* 인수 */
 import { api } from '../api/tmdb';
-/* 인수 */
 
 const List = ({tab, setTab}) => {
   const {dataCtrl, main, myState, setMain, storeMovieIdx, setStoreMovieIdx} = store();
   const [swiperInstance, setSwiperInstance] = useState(null);
-  const [loading, setLoading] = useState(false); // 로딩 상태 추가
+  const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const bgUrl = 'https://image.tmdb.org/t/p/original/'
 
@@ -38,7 +36,7 @@ const List = ({tab, setTab}) => {
   //   }
   // }, [main]);
 
-  /* 인수 */
+
   const getMovieTvData = async () => {
       const res = await api.all()
 
@@ -72,7 +70,6 @@ const List = ({tab, setTab}) => {
       }
     }
   },[myState, main, tab])
-  /* 인수 */
 
   const goToFirstSlide = () => {
     // 첫 번째 슬라이드로 이동
@@ -90,15 +87,15 @@ const List = ({tab, setTab}) => {
 
   return (
     <div className='list wrap' style={{backgroundImage: `url(${bgUrl}${movies[storeMovieIdx].backdrop_path})`}}>
-      <Link to='/detail'>
+      <Link to={`/detail/${movies[storeMovieIdx].id}`}>
         <button type='button' className='play-btn' />
       </Link>
       <div className='container'>
         <div className='movie-info-wrap'>
-          <Rating movies={movies}/>
+          <Rating score={main?.movieTrending[storeMovieIdx]?.vote_average.toFixed(1)}/>
           <TextList lang={`${movies[storeMovieIdx].original_language}`}>
             {movies[storeMovieIdx].genre_ids.map((genre,i)=>(
-              <li>{genre}</li>
+              <li key={movies.id}>{genre}</li>
             ))}
           </TextList>
           <h2 className='title'>{movies[storeMovieIdx].title}</h2>
@@ -148,7 +145,7 @@ const List = ({tab, setTab}) => {
             >
               {movies.map((movie, i) => (
                 <SwiperSlide key={movie.id}>
-                  <MovieItem title={myState === 'tv' ? movie.name : movie.original_title} poster={movie.poster_path}/>
+                  <MovieItem title={myState === 'tv' ? movie.name : movie.title} poster={movie.poster_path}/>
                 </SwiperSlide>
               ))}
             </Swiper>
