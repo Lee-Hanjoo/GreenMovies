@@ -6,6 +6,7 @@ import { api } from '../api/tmdb';
 const store = create((set) => ({
   main:{},
   list:[],
+  cont:{},
   myState : 'movie',
   stateChange:(s)=>{
     set({myState:s})
@@ -27,7 +28,7 @@ const store = create((set) => ({
 
   storeMovieIdx: 0,
   setStoreMovieIdx:(idx) => set({ storeMovieIdx: idx }),
-
+  setCont: (newData) => set({ cont: newData }),
 }))
 
 export default store

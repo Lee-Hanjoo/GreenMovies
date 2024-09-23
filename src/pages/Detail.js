@@ -13,9 +13,8 @@ import { useParams } from 'react-router-dom';
 
 const Detail = () => {
   
-  const { myState } = store();
+  const { myState, cont, setCont } = store();
   const [loading, setLoading] = useState(false);
-  const [cont, setCont] = useState({});
   const {id} = useParams();
   const bgUrl = 'https://image.tmdb.org/t/p/original/'
 
