@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -12,64 +12,49 @@ import store from '../state/store';
 import { api } from '../api/tmdb';
 
 const List = ({tab, setTab}) => {
-  const {dataCtrl, main, myState, setMain, storeMovieIdx, setStoreMovieIdx} = store();
+  const {dataCtrl, main, myState, setMain, storeMovieIdx, setStoreMovieIdx, cont, setCont} = store();
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [id, setId] = useState();
   const bgUrl = 'https://image.tmdb.org/t/p/original/'
-
-  // const [movieIdx, setMovieIdx] = useState(0)
-
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await dataCtrl({t:'main'});  
-  //     console.log(res);
-      
-  //   };
-  //   fetchData();
-  // }, []);
-  // useEffect(() => {
-  //   if (main.movieTrending) {
-  //     setLoading(false); // movies 배열이 채워지면 로딩 완료
-  //     setMovies((myState === 'tv') ? main.tvTrending :  main.movieTrending)
-  //   }
-  // }, [main]);
-
 
   const getMovieTvData = async () => {
       const res = await api.all()
 
       setMain(res)
-      
       setLoading(false); // movies 배열이 채워지면 로딩 완료
-    
   }
 
+  const getMovieDetail = async (id) => {
+    
+    let contType = myState;
+    const res = await api.detail(contType, id);
+    // const res = await api.detail(myState, id);
+    setCont(res);
+    setLoading(false); // 로딩 상태를 false로 설정
+  };
+  
   useEffect(() => {
     getMovieTvData()
   }, [])
 
-  useEffect(()=>{
-
-    if(!main) return;
-
-    if(myState === 'tv') {
-      // tv일때~ tv만을 위한 곳 tv의 트렌드 부터 시작
-      if(tab === 'trend') {
-        setMovies(main.tvTrending)
+  useEffect(() => {
+    if (main) {
+      if (myState === 'tv') {
+        setMovies(tab === 'trend' ? main.tvTrending : main.tvToprated);
       } else {
-        setMovies(main.tvToprated)
-      }
-    } else {
-      // movie!! 
-      if(tab === 'trend') {
-        setMovies(main.movieTrending)
-      } else {
-        setMovies(main.movieToprated)
+        setMovies(tab === 'trend' ? main.movieTrending : main.movieToprated);
       }
     }
-  },[myState, main, tab])
+  }, [myState, main, tab]);
+
+  useEffect(() => {
+    if (Array.isArray(movies) && movies.length > 0 && storeMovieIdx >= 0 && storeMovieIdx < movies.length) {
+      const id = movies[storeMovieIdx].id; // 현재 영화 ID 가져오기
+      getMovieDetail(id); // ID를 인자로 전달
+    }
+  }, [movies, storeMovieIdx]);
 
   const goToFirstSlide = () => {
     // 첫 번째 슬라이드로 이동
@@ -78,11 +63,16 @@ const List = ({tab, setTab}) => {
     }
   };
 
+  useEffect(() => {
+    goToFirstSlide()
+    setStoreMovieIdx(0)
+  }, [myState]);
 
-  if (loading) {
-    return <div>Loading...</div>
+
+  if (!Array.isArray(movies) || movies.length === 0) {
+    return <div>Loading...</div>; // 또는 다른 로딩 표시
   }
-  
+
   if(!movies?.length) return
 
   return (
@@ -92,13 +82,22 @@ const List = ({tab, setTab}) => {
       </Link>
       <div className='container'>
         <div className='movie-info-wrap'>
-          <Rating score={main?.movieTrending[storeMovieIdx]?.vote_average.toFixed(1)}/>
+          <Rating score={movies[storeMovieIdx].vote_average.toFixed(1)}/>
           <TextList lang={`${movies[storeMovieIdx].original_language}`}>
-            {movies[storeMovieIdx].genre_ids.map((genre,i)=>(
-              <li key={movies.id}>{genre}</li>
-            ))}
+          {cont && cont.genres && cont.genres.length > 0 ? (
+            cont.genres.map((genre, i) => (
+              <li key={i}>{genre.name}</li>
+            ))
+            ) : (
+              <li>No genres available</li>
+            )
+          }
           </TextList>
-          <h2 className='title'>{movies[storeMovieIdx].title}</h2>
+          <h2 className='title'>
+            {
+              myState === 'tv' ? movies[storeMovieIdx].name : movies[storeMovieIdx].title
+            }
+          </h2>
           <p className='desc'>{movies[storeMovieIdx].overview}</p>
         </div>
         <div className='tab-wrap'>
@@ -128,7 +127,11 @@ const List = ({tab, setTab}) => {
               modules={[Navigation]} 
               spaceBetween={25}
               onSlideChange={(v) => {
-                setStoreMovieIdx(v.activeIndex)
+                const newIndex = v.activeIndex;
+                if (newIndex >= 0 && newIndex < movies.length) {
+                  setStoreMovieIdx(newIndex);
+                  setId(movies[newIndex].id); // ID 설정
+                }
               }}
               breakpoints={{
                 479: {

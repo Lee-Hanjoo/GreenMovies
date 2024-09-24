@@ -44,6 +44,7 @@ const Home = () => {
   const videoKey = cont.videos?.results?.[1]?.key;
   const popupVideoKey = cont.videos?.results?.[0]?.key;
 
+  // 영상 일시정지
   if(videoKey) {
     window.addEventListener("scroll", ()=>{
       const iframe = document.getElementById('iframe');
@@ -56,9 +57,6 @@ const Home = () => {
     })
   }
 
-  console.log(cont);
-  console.log(videoKey);
-  console.log(popupVideoKey);
   if(!cont || !videoKey || !popupVideoKey) return;
 
   return (
