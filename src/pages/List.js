@@ -56,10 +56,10 @@ const List = ({tab, setTab}) => {
     }
   }, [movies, storeMovieIdx]);
 
-  const goToFirstSlide = () => {
+  const goToFirstSlide = (idx) => {
     // 첫 번째 슬라이드로 이동
     if (swiperInstance) {
-      swiperInstance.slideTo(0); // 인덱스 0: 첫 번째 슬라이드
+      swiperInstance.slideTo(idx); // 인덱스 0: 첫 번째 슬라이드
     }
   };
 
@@ -106,7 +106,7 @@ const List = ({tab, setTab}) => {
               onClick={()=>{
                 setTab('trend');
                 setStoreMovieIdx(0);
-                goToFirstSlide()
+                goToFirstSlide(0)
               }
             }
             >TRENDING</li>
@@ -114,7 +114,7 @@ const List = ({tab, setTab}) => {
               onClick={()=>{
                 setTab('top');
                 setStoreMovieIdx(0)
-                goToFirstSlide()
+                goToFirstSlide(0)
               }
             }
             >TOP RATED</li>
@@ -147,7 +147,12 @@ const List = ({tab, setTab}) => {
               className={`swiper`}
             >
               {movies.map((movie, i) => (
-                <SwiperSlide key={movie.id}>
+                <SwiperSlide key={movie.id} 
+                  onClick={()=>{
+                    setStoreMovieIdx(i)
+                    goToFirstSlide(i)
+                  }}
+                  >
                   <MovieItem title={myState === 'tv' ? movie.name : movie.title} poster={movie.poster_path}/>
                 </SwiperSlide>
               ))}

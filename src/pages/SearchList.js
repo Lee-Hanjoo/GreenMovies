@@ -23,14 +23,14 @@ const SearchList = () => {
     <div className='search-list wrap'>
       <div className={`search-list-top-wrap`}>
         <div className='sort-wrap'>
-          <Sort list={['action','romance','comedy']}/>
-          <Sort chk list={['en','fr','ko']}/>
+          <Sort list={['Movies','Tv Series']}/>
+          <Sort chk list={['action','romance','comedy','horror','animation','crime','drama']}/>
         </div>
         <Search />
       </div>
       <ul className='movie-list-box'>
         {movies.map((movie, i) => (
-          <li key={i}>
+          <li key={i} onClick={()=>{}}>
             <MovieItem title={movie.title} poster={movie.poster_path}/>
           </li>
         ))}
