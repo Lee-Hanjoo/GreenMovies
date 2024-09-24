@@ -40,8 +40,19 @@ const Home = () => {
     return <div>Loading...</div>;
   }
 
-  console.log(cont);
   const videoKey = cont.videos?.results?.[1]?.key;
+
+  if(videoKey) {
+    window.addEventListener("scroll", ()=>{
+      const iframe = document.getElementById('iframe');
+      // &rel=0&enablejsapi=1
+      if(window.scrollY > 470) {
+        // let iframeSrc = iframe.getAttribute("src")
+      }else {
+        // iframe.setAttribute("src", `${youtubeUrl}${videoKey}?autoplay=1&mute=true&controls=0&loop=1&playlist=${videoKey}`)
+      }
+    })
+  }
 
   return (
     <div className='home wrap'>
@@ -57,12 +68,13 @@ const Home = () => {
               <p className='title'>{main.movieTrending[0].title}</p>
             </div>
             <iframe
-              src={`${youtubeUrl}${videoKey}?autoplay=1&mute=1&controls=0&loop=1&playlist=${videoKey}`}
+              id='iframe'
+              src={`${youtubeUrl}${videoKey}?autoplay=1&mute=true&controls=0&loop=1&playlist=${videoKey}`}
               title="video"
               allowFullScreen
               autoPlay='1'
               allow="autoplay"
-              mute
+              mute="true"
             />
           </>
       ) : (

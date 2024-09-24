@@ -42,8 +42,6 @@ const Detail = () => {
   const hours = cont.runtime ? Math.floor(cont.runtime / 60) : 0;
   const minutes = cont.runtime ? cont.runtime % 60 : 0;
 
-  console.log(cont);
-  
   return (
     <div className='detail wrap' style={{backgroundImage: `url(${bgUrl}${cont.backdrop_path})`}}>
       <div className='container'>
