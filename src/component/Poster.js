@@ -9,7 +9,7 @@ const Poster = (props) => {
       <button type='button' className='poster-btn' onClick={()=>{setPop(!pop)}}>
         POSTER
       </button>
-      <div className={`poster-pop ${pop ? 'on' : ''}`} onClick={()=>{setPop(false)}}>
+      <div className={`popup ${pop ? 'on' : ''}`} onClick={()=>{setPop(false)}}>
         <img src={bgUrl + props.path}></img>
       </div>
     </div>
