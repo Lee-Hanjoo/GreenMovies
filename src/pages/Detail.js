@@ -10,6 +10,7 @@ import Poster from '../component/Poster';
 import store from '../state/store';
 import { api } from '../api/tmdb';
 import { useParams } from 'react-router-dom';
+import backdrop_nodata from '../imgs/backdrop_path_nodata.jpg'
 
 const Detail = () => {
   
@@ -31,6 +32,8 @@ const Detail = () => {
     getMovieTvData()
   }, [])
 
+  console.log(cont)
+
   if (loading) {
     return <div>Loading...</div>
   }
@@ -39,11 +42,18 @@ const Detail = () => {
     return <div>데이터를 불러올 수 없습니다.</div>;
   }
 
-  const hours = cont.runtime ? Math.floor(cont.runtime / 60) : 0;
-  const minutes = cont.runtime ? cont.runtime % 60 : 0;
+  const hours = myState === 'movie' ? (cont.runtime && Math.floor(cont.runtime / 60)) : (cont.episode_run_time && Math.floor(cont.episode_run_time / 60))
+  const minutes = myState === 'movie' ? (cont.runtime && cont.runtime % 60) : (cont.episode_run_time && cont.episode_run_time % 60)
 
   return (
-    <div className='detail wrap' style={{backgroundImage: `url(${bgUrl}${cont.backdrop_path})`}}>
+    <div className='detail wrap' 
+      style={
+        cont.backdrop_path ? 
+          {backgroundImage: `url(${bgUrl}${cont.backdrop_path})`}
+        :
+          {backgroundImage: `url(${backdrop_nodata})`}
+      }
+    >
       <div className='container'>
         <div className='movie-info-wrap'>
           <div className='genre-wrap'>
@@ -53,11 +63,27 @@ const Detail = () => {
             ))}
           </TextList>
           </div>
-          <h2 className='title'>{cont.title}</h2>
+          <h2 className='title' onClick={()=>{window.open(cont.homepage)}}>
+            {myState === 'movie' && cont.title}
+            {myState === 'tv' && cont.name}
+          </h2>
           <TextList>
-            <li>{cont.release_date}</li>
-            <li>DIRECTOR: <span>{cont.casts.crew[0].name}</span></li>
-            <li>{hours} H {minutes} M</li>
+            {myState === 'tv' &&
+              <>
+                {/* <li className='networks-wrap'><img src={bgUrl + cont.networks[0].logo_path} onClick={()=>{window.open(cont.homepage)}} />{cont.networks[0].name}</li> */}
+                {cont.networks && <li className='networks-wrap'><img src={bgUrl + cont.networks[0].logo_path} onClick={()=>{window.open(cont.homepage)}} /></li> }
+                <li>{cont.first_air_date}{` ~ ` + cont.last_air_date}</li>
+                {cont.created_by.name && <li>CREATOR: <span>{cont.created_by[0].name}</span></li>}
+                {cont.seasons && <li>SEASONS({cont.number_of_seasons})</li>}
+              </>
+            }
+            {myState === 'movie' &&
+              <>
+                <li>{cont.release_date}</li>
+                <li>DIRECTOR: <span>{cont.casts.crew[0].name}</span></li>
+              </>
+            }
+            <li>{hours === 0 ? '' : hours + ` H`} {minutes === 0 ? '' : minutes + ` M`}</li>
           </TextList>
           <p className='desc'>{cont.overview}</p>
           <div className='side-menu-wrap'>
@@ -66,48 +92,89 @@ const Detail = () => {
           </div>
         </div>
         <div className='bottom-wrap'>
-          <div className='cast-wrap'>
-            <p className='label'>cast</p>
-            <Swiper 
-              navigation={true} 
-              modules={[Navigation]} 
-              spaceBetween={25}
-              breakpoints={{
-                479: {
-                  slidesPerView: 3.5
-                },
-                767: {
-                  slidesPerView: 4.5
-                },
-                1279: {
-                  slidesPerView: 5.5
-                }
-              }}
-              className={`swiper cast-list`}
-            >
-              {cont.casts.cast.map((cast, i) => (
-                <SwiperSlide>
-                  <MovieItem title={cast.name} poster={cast.profile_path}/>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-          <div className='trailer-wrap'>
-            <p className='label'>trailer</p>
-            <Swiper 
-              navigation={true} 
-              modules={[Navigation]} 
-              slidesPerView={2.5}
-              spaceBetween={25}
-              className={`swiper trailer-list`}
-            >
-              {cont.videos.results.map((video, i) => (
-                <SwiperSlide>
-                  <MovieItem trailer title={video.name} poster={video.key}/>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
+          {
+            myState === 'movie' && 
+            <>
+              {cont.casts.cast.length > 0 && 
+                <div className='cast-wrap'>
+                  <p className='label'>cast</p>
+                  <Swiper 
+                    navigation={true} 
+                    modules={[Navigation]} 
+                    spaceBetween={25}
+                    breakpoints={{
+                      479: {
+                        slidesPerView: 3.5
+                      },
+                      767: {
+                        slidesPerView: 4.5
+                      },
+                      1279: {
+                        slidesPerView: 5.5
+                      }
+                    }}
+                    className={`swiper cast-list`}
+                  >
+                    {cont.casts.cast.map((cast, i) => (
+                      <SwiperSlide>
+                        <MovieItem title={cast.name} poster={cast.profile_path} />
+                      </SwiperSlide>
+                    ))
+                    }
+                  </Swiper>
+                </div>
+              }
+              {cont.videos.results.length > 0 && 
+                <div className='trailer-wrap'>
+                  <p className='label'>trailer</p>
+                  <Swiper 
+                    navigation={true} 
+                    modules={[Navigation]} 
+                    slidesPerView={2.5}
+                    spaceBetween={25}
+                    className={`swiper trailer-list`}
+                  >
+                    {cont.videos.results.map((video, i) => (
+                      <SwiperSlide>
+                        <MovieItem trailer title={video.name} poster={video.key}/>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
+              }
+            </>
+          }
+          {
+            myState === 'tv' &&
+            <>
+              <div className='season-wrap'>
+                <p className='label'>cast</p>
+                <Swiper 
+                  navigation={true} 
+                  modules={[Navigation]} 
+                  spaceBetween={25}
+                  breakpoints={{
+                    479: {
+                      slidesPerView: 3.5
+                    },
+                    767: {
+                      slidesPerView: 4.5
+                    },
+                    1279: {
+                      slidesPerView: 5.5
+                    }
+                  }}
+                  className={`swiper cast-list`}
+                >
+                  {cont.images.posters.map((poster, i) => (
+                    <SwiperSlide>
+                      <MovieItem poster={poster.file_path}/>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            </>
+          }
         </div>
       </div>
     </div>

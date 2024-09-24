@@ -381,6 +381,16 @@
   display: flex;
   align-items: center;
 }
+.text-list .networks-wrap {
+  display: flex;
+  align-items: center;
+}
+.text-list .networks-wrap img{
+  width: auto;
+  max-height: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
 .text-list .lang {
   font-size: 16px;
   margin-left: 20px;
@@ -565,6 +575,7 @@
 }
 .detail .movie-info-wrap .title {
   min-height: auto;
+  cursor: pointer;
 }
 .detail .side-menu-wrap {
   position: absolute;

@@ -8,6 +8,7 @@ import MovieItem from '../component/MovieItem';
 import Rating from '../component/Rating';
 import TextList from '../component/TextList';
 import store from '../state/store';
+import backdrop_nodata from '../imgs/backdrop_path_nodata.jpg'
 
 import { api } from '../api/tmdb';
 
@@ -68,7 +69,6 @@ const List = ({tab, setTab}) => {
     setStoreMovieIdx(0)
   }, [myState]);
 
-
   if (!Array.isArray(movies) || movies.length === 0) {
     return <div>Loading...</div>; // 또는 다른 로딩 표시
   }
@@ -76,7 +76,14 @@ const List = ({tab, setTab}) => {
   if(!movies?.length) return
 
   return (
-    <div className='list wrap' style={{backgroundImage: `url(${bgUrl}${movies[storeMovieIdx].backdrop_path})`}}>
+    <div className='list wrap' 
+      style={
+        cont.backdrop_path ? 
+          {backgroundImage: `url(${bgUrl}${cont.backdrop_path})`}
+        :
+          {backgroundImage: `url(${backdrop_nodata})`}
+      }
+    >
       <Link to={`/detail/${movies[storeMovieIdx].id}`}>
         <button type='button' className='play-btn' />
       </Link>

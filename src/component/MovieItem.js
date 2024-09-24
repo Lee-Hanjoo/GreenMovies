@@ -1,4 +1,5 @@
 import React from 'react'
+import cast_nodata from '../imgs/cast_nodata.jpg'
 
 const MovieItem = (props) => {
   
@@ -22,6 +23,7 @@ const MovieItem = (props) => {
         props.trailer || props.video ? 
           <iframe src={youtubeUrl + props.poster + '&rel=0'} width={w} title="video" height={h} allowFullScreen autoPlay='1' />
           :
+          // <img src={props.poster.length > 4 ? cast_nodata : bgUrl + props.poster} alt='' />
           <img src={bgUrl + props.poster} alt='' />
       }
       <p className='title'>{props.title}</p>
