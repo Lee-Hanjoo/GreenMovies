@@ -32,8 +32,9 @@ export const api = {
     });
     return res.data;
   },
-  list:async ()=>{
-    const res = await instance.get('/discover/movie',{
+  list:async (t,genre)=>{
+    // https://discover/movie?with_genres=10770
+    const res = await instance.get(`/discover/${t}`,{
       params:{
         with_genres:10749,
         with_original_language:'en',

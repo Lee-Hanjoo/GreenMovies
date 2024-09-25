@@ -622,17 +622,15 @@
   left: 0;
   top: 0;
 }
-.cast-wrap {
-  width: calc(100% - 58%);
+.trailer-wrap, .cast-wrap, .season-wrap {
+  min-height: 314px;
   position: relative;
+}
+.cast-wrap, .season-wrap {
+  width: calc(100% - 58%);
 }
 .trailer-wrap {
   width: calc(100% - 48%);
-  position: relative;
-}
-.season-wrap {
-  width: calc(100% - 58%);
-  position: relative;
 }
 .popup {
   width: 100%;

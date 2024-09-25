@@ -7,6 +7,7 @@ const store = create((set) => ({
   main:{},
   list:[],
   cont:{},
+  genre:28,
   myState : 'movie',
   stateChange:(s)=>{
     set({myState:s})
@@ -29,6 +30,9 @@ const store = create((set) => ({
   storeMovieIdx: 0,
   setStoreMovieIdx:(idx) => set({ storeMovieIdx: idx }),
   setCont: (newData) => set({ cont: newData }),
+
+  setGenre: (newData) => set({ genre: newData }),
+  setList: (newData) => set({ list: newData }),
 }))
 
 export default store
