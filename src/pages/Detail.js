@@ -16,6 +16,7 @@ const Detail = () => {
   
   const { myState, cont, setCont } = store();
   const [loading, setLoading] = useState(false);
+  const [trailerImgHeight, setTrailerImgHeight] = useState(0);
   const {id} = useParams();
   const bgUrl = 'https://image.tmdb.org/t/p/original/'
 
@@ -34,6 +35,26 @@ const Detail = () => {
 
   console.log(cont)
 
+  const updateImgHeight = () => {
+      const castimg = document.querySelector('.cast-list .movie-item img');
+      if (castimg) {
+        const height = castimg.clientHeight;
+        setTrailerImgHeight(height);
+      }
+  }
+
+  useEffect(()=>{
+    updateImgHeight(); // cont가 변경될 때 호출
+
+    // window resize 이벤트 리스너 등록
+    window.addEventListener('resize', updateImgHeight);
+
+    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener('resize', updateImgHeight);
+    };
+  },[cont])
+
   if (loading) {
     return <div>Loading...</div>
   }
@@ -44,6 +65,8 @@ const Detail = () => {
 
   const hours = myState === 'movie' ? (cont.runtime && Math.floor(cont.runtime / 60)) : (cont.episode_run_time && Math.floor(cont.episode_run_time / 60))
   const minutes = myState === 'movie' ? (cont.runtime && cont.runtime % 60) : (cont.episode_run_time && cont.episode_run_time % 60)
+
+ 
 
   return (
     <div className='detail wrap' 
@@ -63,7 +86,11 @@ const Detail = () => {
             ))}
           </TextList>
           </div>
-          <h2 className='title' onClick={()=>{window.open(cont.homepage)}}>
+          <h2 className={`title ${cont.homepage !== '' && 'pointer'}`} 
+            onClick={()=>{
+              cont.homepage !== '' && window.open(cont.homepage)
+            }}
+          >
             {myState === 'movie' && cont.title}
             {myState === 'tv' && cont.name}
           </h2>
@@ -73,7 +100,7 @@ const Detail = () => {
                 {/* <li className='networks-wrap'><img src={bgUrl + cont.networks[0].logo_path} onClick={()=>{window.open(cont.homepage)}} />{cont.networks[0].name}</li> */}
                 {cont.networks && <li className='networks-wrap'><img src={bgUrl + cont.networks[0].logo_path} onClick={()=>{window.open(cont.homepage)}} /></li> }
                 <li>{cont.first_air_date}{` ~ ` + cont.last_air_date}</li>
-                {cont.created_by.name && <li>CREATOR: <span>{cont.created_by[0].name}</span></li>}
+                {cont.created_by.length > 0 && <li>CREATOR: <span>{cont.created_by[0].name}</span></li>}
                 {cont.seasons && <li>SEASONS({cont.number_of_seasons})</li>}
               </>
             }
@@ -124,31 +151,13 @@ const Detail = () => {
                   </Swiper>
                 </div>
               }
-              {cont.videos.results.length > 0 && 
-                <div className='trailer-wrap'>
-                  <p className='label'>trailer</p>
-                  <Swiper 
-                    navigation={true} 
-                    modules={[Navigation]} 
-                    slidesPerView={2.5}
-                    spaceBetween={25}
-                    className={`swiper trailer-list`}
-                  >
-                    {cont.videos.results.map((video, i) => (
-                      <SwiperSlide>
-                        <MovieItem trailer title={video.name} poster={video.key}/>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                </div>
-              }
             </>
           }
           {
-            myState === 'tv' &&
+            myState === 'tv' && cont.seasons &&
             <>
               <div className='season-wrap'>
-                <p className='label'>cast</p>
+                <p className='label'>season</p>
                 <Swiper 
                   navigation={true} 
                   modules={[Navigation]} 
@@ -164,16 +173,35 @@ const Detail = () => {
                       slidesPerView: 5.5
                     }
                   }}
-                  className={`swiper cast-list`}
+                  className={`swiper season-list`}
                 >
-                  {cont.images.posters.map((poster, i) => (
+                  {cont.seasons.map((season, i) => (
                     <SwiperSlide>
-                      <MovieItem poster={poster.file_path}/>
+                      <MovieItem title={season.name} poster={season.poster_path}/>
                     </SwiperSlide>
                   ))}
                 </Swiper>
               </div>
             </>
+          }
+          {
+            cont.videos.results.length > 0 && 
+            <div className='trailer-wrap'>
+              <p className='label'>trailer</p>
+              <Swiper 
+                navigation={true} 
+                modules={[Navigation]} 
+                slidesPerView={2.5}
+                spaceBetween={25}
+                className={`swiper trailer-list`}
+              >
+                {cont.videos.results.map((video, i) => (
+                  <SwiperSlide>
+                    <MovieItem trailer title={video.name} poster={video.key} height={trailerImgHeight}/>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           }
         </div>
       </div>

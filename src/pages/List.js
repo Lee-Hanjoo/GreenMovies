@@ -90,16 +90,18 @@ const List = ({tab, setTab}) => {
       <div className='container'>
         <div className='movie-info-wrap'>
           <Rating score={movies[storeMovieIdx].vote_average.toFixed(1)}/>
-          <TextList lang={`${movies[storeMovieIdx].original_language}`}>
-          {cont && cont.genres && cont.genres.length > 0 ? (
-            cont.genres.map((genre, i) => (
-              <li key={i}>{genre.name}</li>
-            ))
-            ) : (
-              <li>No genres available</li>
-            )
-          }
-          </TextList>
+          <div className='genre-wrap'>
+            <TextList lang={`${movies[storeMovieIdx].original_language}`}>
+              {cont && cont.genres && cont.genres.length > 0 ? (
+                cont.genres.map((genre, i) => (
+                  <li key={i}>{genre.name}</li>
+                ))
+                ) : (
+                  <li>No genres available</li>
+                )
+              }
+            </TextList>
+          </div>
           <h2 className='title'>
             {
               myState === 'tv' ? movies[storeMovieIdx].name : movies[storeMovieIdx].title
@@ -142,13 +144,13 @@ const List = ({tab, setTab}) => {
               }}
               breakpoints={{
                 479: {
-                  slidesPerView: 3.5
+                  slidesPerView: 2.5
                 },
                 767: {
-                  slidesPerView: 4.5
+                  slidesPerView: 3.5
                 },
                 1279: {
-                  slidesPerView: 5.5
+                  slidesPerView: 4.5
                 }
               }}
               className={`swiper`}

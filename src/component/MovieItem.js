@@ -1,10 +1,21 @@
-import React from 'react'
-import cast_nodata from '../imgs/cast_nodata.jpg'
+import React, { useEffect, useState } from 'react'
+import cast_nodata from '../imgs/cast_nodata.svg'
 
 const MovieItem = (props) => {
   
   const bgUrl = 'https://image.tmdb.org/t/p/original/'
   const youtubeUrl = 'https://www.youtube.com/embed/'
+  const [nodata, setNodata] = useState(false) 
+  const posterType = typeof(props.poster)
+
+
+  useEffect(()=>{
+    if(posterType == 'string') {
+      setNodata(false)
+    } else {
+      setNodata(true)
+    }
+  },[posterType])
 
   let w = '';
   let h = '';
@@ -13,9 +24,11 @@ const MovieItem = (props) => {
     w = "400px";
     h = "295px";
   } else if(props.trailer){
-    w = "240px";
-    h = "135px";
+    w = "100%";
+    h = props.height;
   }
+
+  console.log(props.height);
 
   return (
     <div className='movie-item'>
@@ -23,8 +36,7 @@ const MovieItem = (props) => {
         props.trailer || props.video ? 
           <iframe src={youtubeUrl + props.poster + '&rel=0'} width={w} title="video" height={h} allowFullScreen autoPlay='1' />
           :
-          // <img src={props.poster.length > 4 ? cast_nodata : bgUrl + props.poster} alt='' />
-          <img src={bgUrl + props.poster} alt='' />
+          <img src={nodata ? cast_nodata : bgUrl + props.poster} alt='' />
       }
       <p className='title'>{props.title}</p>
     </div>
