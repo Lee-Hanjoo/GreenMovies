@@ -471,9 +471,13 @@
 /* .swiper:not(.trailer-list) .swiper-slide {
   max-width: 130px;
 } */
-.swiper .swiper-slide {
+.wrap:not(.detail) .swiper .swiper-slide {
   cursor: pointer;
-  transition: all 0.3s;
+  transition: transform 0.3s;
+}
+.wrap.detail .swiper .swiper-slide .movie-item > img,
+.wrap.detail .swiper .swiper-slide .movie-item > iframe {
+  cursor: pointer;
 }
 .swiper .swiper-slide:hover {
   transform: translateY(-5px);
@@ -547,9 +551,9 @@
   -webkit-box-orient: vertical;
   word-break: keep-all;
 }
-.movie-item > img, .movie-item > iframe {
-  max-height: 172px;
-}
+/* .detail .movie-item > img, .detail .movie-item > iframe {
+  min-height: 150px;
+} */
 
 /* ERROR 에러페이지 */
 .error > div {
@@ -738,4 +742,11 @@
 }
 .sort-list.chk-type li.on {
   background: #fff url('../../public/assets/imgs/icon/icon_chk_on.svg') no-repeat left 8px center;
+}
+
+
+
+/*  */
+@media screen and (max-width : 1200px) {
+  
 }
