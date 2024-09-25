@@ -4,12 +4,12 @@ import Sort from '../component/Sort';
 import Search from '../component/Search';
 import store from '../state/store';
 import { api } from '../api/tmdb';
-import { useParams } from 'react-router-dom';
 
 const SearchList = () => {
 
   let {myState, list, setList, genre} = store();
   const [loading, setLoading] = useState(false);
+  const [bottomOpen, setBottomOpen] = useState(false);
 
 
   const getMovieTvData = async (genre) => {
@@ -30,16 +30,41 @@ const SearchList = () => {
     return <div>Loading...</div>
   }
 
-  console.log(myState, genre);
 
   return (
     <div className='search-list wrap'>
       <div className={`search-list-top-wrap`}>
-        <div className='sort-wrap'>
-          <Sort state list={['Movies','Tv Series']}/>
-          <Sort genre chk list={{'action':28,'romance':10749,'comedy':35,'horror':27,'animation':16,'crime':80,'drama':18}}/>
+        <div className='top'>
+          <div className='sort-box'>
+            <Sort state list={['Movies','Tv Series']}/>
+            <Sort lang chk icon list={['en', 'fr', 'ko', 'ja', 'zh', 'th']}/>
+          </div>
+          <Search />
         </div>
-        <Search />
+        <div className={`bottom ${bottomOpen ? 'on' : ''}`}>
+          <button type='button' className='sort-flip-btn' onClick={()=>{setBottomOpen(!bottomOpen)}}></button>
+          <Sort genre chk multiple list={{
+            'adventure':12,
+            'fantasy':14,
+            'animation':16,
+            'drama':18,
+            'horror':27,
+            'action':28,
+            'comedy':35,
+            'history':36,
+            'western':37,
+            'thriller':53,
+            'crime':80,
+            'documentary':99,
+            'sf':878,
+            'mystery':9648,
+            'music':10402,
+            'romance':10749,
+            'family':10751,
+            'war':10752,
+            'tv movie':10770,
+          }}/>
+        </div>
       </div>
       <ul className='movie-list-box'>
         {list.map((movie, i) => (

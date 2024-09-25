@@ -33,11 +33,14 @@ export const api = {
     return res.data;
   },
   list:async (t,genre)=>{
-    // https://discover/movie?with_genres=10770
+    // 최신순	    release_date.desc
+    // 인기순	    popularity.desc
     const res = await instance.get(`/discover/${t}`,{
       params:{
-        with_genres:10749,
+        with_genres: 28,
         with_original_language:'en',
+        with_text_query:'',
+        sort_by:'popularity.desc'
       }
     });
     return res.data.results;
