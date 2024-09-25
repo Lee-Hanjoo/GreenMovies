@@ -12,17 +12,17 @@ const SearchList = () => {
   const [bottomOpen, setBottomOpen] = useState(false);
 
 
-  const getMovieTvData = async (genre) => {
+  const getMovieTvData = async (genre, withOriginalLanguage, withTextQuery, sortBy) => {
 
     let contType = myState;
-    const res = await api.list(contType, genre);
+    const res = await api.list(contType, genre, withOriginalLanguage, withTextQuery, sortBy);
     
     setList(res)
     setLoading(false);
   }
   
   useEffect(() => {
-    getMovieTvData()
+    getMovieTvData(genre, withOriginalLanguage, withTextQuery, sortBy)
   }, [])
 
   

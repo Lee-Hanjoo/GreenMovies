@@ -253,7 +253,7 @@ const Home = () => {
       </div>
       <div className={`popup ${pop ? 'on' : ''}`} onClick={()=>{setPop(false)}}>
         {popupVideoKey ? 
-          <MovieItem video poster={popupVideoKey}/>
+          <MovieItem video poster={pop ? popupVideoKey : ''}/>
         :
           <div>No data</div>
         }

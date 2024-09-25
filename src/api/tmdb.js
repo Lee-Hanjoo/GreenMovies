@@ -32,15 +32,15 @@ export const api = {
     });
     return res.data;
   },
-  list:async (t,genre)=>{
+  list:async (t, genre, withOriginalLanguage, withTextQuery, sortBy)=>{
     // 최신순	    release_date.desc
     // 인기순	    popularity.desc
     const res = await instance.get(`/discover/${t}`,{
       params:{
-        with_genres: 28,
-        with_original_language:'en',
-        with_text_query:'',
-        sort_by:'popularity.desc'
+        with_genres: genre,
+        with_original_language: withOriginalLanguage,
+        with_text_query: withTextQuery,
+        sort_by: sortBy
       }
     });
     return res.data.results;
