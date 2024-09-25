@@ -43,6 +43,7 @@ export const api = {
         sort_by: sortBy
       }
     });
+    console.log(res.data.results)
     return res.data.results;
   },
   search:async (t,keyword)=>{

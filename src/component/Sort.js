@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import store from '../state/store';
 
 const Sort = (props) => {
+  const { sortObj, setSortObj, type } = props
   const {stateChange, setGenre} = store();
 
   let item = Object.keys(props.list)
@@ -33,13 +34,25 @@ const Sort = (props) => {
             <li key={i} 
               className={`${selectedItems.includes(item[i]) ? 'selected' : ''} ${on === i ? 'on' : ''}`} 
               onClick={()=>{
+                if(type === 'movieTv') {
+                  setSortObj({...sortObj, [type]: v === 'Movies' ? 'movie' : 'tv'})
+                } else if(type === 'language') {
+                  setSortObj({...sortObj, [type]: value[i]})
+                } else {
+                  let genreArr = sortObj.genre.split(',')
+                  if(genreArr.includes(value[i])) {
+                    genreArr = genreArr.filter((vv) => vv !== value[i])
+                  } else {
+                    genreArr.push(value[i])
+                  }
+                  setSortObj({...sortObj, [type]: genreArr.join(',')})
+                }
                 setOn(i)
                 { props.multiple && toggleItem(item[i]) }
-                { props.state && i === 0 && stateChange('movie') }
-                { props.state && i === 1 && stateChange('tv') }
-                { props.genre && setGenre(value[i]) }
+                { type === 'moveiTv' && stateChange(sortObj.movieTv)}
+                { type === 'genre' && setGenre(value[i]) }
               }}
-            >{props.genre ? v : value[i]}</li>
+            >{type === 'genre' ? v : value[i]}</li>
           )
         })
       }

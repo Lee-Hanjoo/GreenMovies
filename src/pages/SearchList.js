@@ -10,7 +10,11 @@ const SearchList = () => {
   let {myState, list, setList, genre} = store();
   const [loading, setLoading] = useState(false);
   const [bottomOpen, setBottomOpen] = useState(false);
-
+  const [sortObj, setSortObj] = useState({
+    movieTv: 'movie',
+    language: 'en',
+    genre: '12'
+  })
 
   const getMovieTvData = async (genre, withOriginalLanguage, withTextQuery, sortBy) => {
 
@@ -22,9 +26,13 @@ const SearchList = () => {
   }
   
   useEffect(() => {
-    getMovieTvData(genre, withOriginalLanguage, withTextQuery, sortBy)
+    // getMovieTvData(genre, withOriginalLanguage, withTextQuery, sortBy)
+    getMovieTvData(genre)
   }, [])
 
+  useEffect(() => {
+    console.log(`sortObj`, sortObj)
+  }, [sortObj])
   
   if (loading) {
     return <div>Loading...</div>
@@ -36,14 +44,14 @@ const SearchList = () => {
       <div className={`search-list-top-wrap`}>
         <div className='top'>
           <div className='sort-box'>
-            <Sort state list={['Movies','Tv Series']}/>
-            <Sort lang chk icon list={['en', 'fr', 'ko', 'ja', 'zh', 'th']}/>
+            <Sort type={'movieTv'} list={['Movies','Tv Series']} setSortObj={setSortObj} sortObj={sortObj} />
+            <Sort type={'language'} chk icon list={['en', 'fr', 'ko', 'ja', 'zh', 'th']} setSortObj={setSortObj} sortObj={sortObj} />
           </div>
           <Search />
         </div>
         <div className={`bottom ${bottomOpen ? 'on' : ''}`}>
           <button type='button' className='sort-flip-btn' onClick={()=>{setBottomOpen(!bottomOpen)}}></button>
-          <Sort genre chk multiple list={{
+          <Sort type={'genre'} chk multiple setSortObj={setSortObj} sortObj={sortObj} list={{
             'adventure':12,
             'fantasy':14,
             'animation':16,
