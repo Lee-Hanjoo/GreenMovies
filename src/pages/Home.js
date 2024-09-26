@@ -44,19 +44,6 @@ const Home = () => {
   const videoKey = cont.videos?.results?.[1]?.key;
   const popupVideoKey = cont.videos?.results?.[0]?.key;
 
-  // 영상 일시정지
-  if(videoKey) {
-    window.addEventListener("scroll", ()=>{
-      const iframe = document.getElementById('iframe');
-      // &rel=0&enablejsapi=1
-      if(window.scrollY > 470) {
-        // let iframeSrc = iframe.getAttribute("src")
-      }else {
-        // iframe.setAttribute("src", `${youtubeUrl}${videoKey}?autoplay=1&mute=true&controls=0&loop=1&playlist=${videoKey}`)
-      }
-    })
-  }
-
   if(!cont || !videoKey || !popupVideoKey) return;
 
   return (

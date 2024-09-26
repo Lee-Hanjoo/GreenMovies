@@ -171,7 +171,7 @@ const Detail = () => {
                 spaceBetween={25}
                 className={`swiper trailer-list`}
               >
-                {cont.videos.results.map((video, i) => (
+                {cont.videos.results.slice(0, 5).map((video, i) => (
                   <SwiperSlide>
                     <MovieItem trailer title={video.name} poster={video.key} />
                   </SwiperSlide>
