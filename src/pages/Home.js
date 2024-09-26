@@ -80,13 +80,17 @@ const Home = () => {
                     onClick={()=>{
                       setPop(true)
                     }}
-                  >PLAY</button>
+                  >Watch Now</button>
                   <button type='button' className='move-detail-btn'
                     onClick={()=>{
                       navigate(`/detail/${main.movieTrending[0].id}`);
                       stateChange('movie');
                     }}
-                  >MORE</button>
+                  >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </button>
                 </div>
               </div>
               <iframe
