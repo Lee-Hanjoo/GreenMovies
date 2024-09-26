@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/GreenMovies/static/css/main.e157e12b.css",
+    "main.js": "/GreenMovies/static/js/main.672d642d.js",
+    "static/js/453.ad244872.chunk.js": "/GreenMovies/static/js/453.ad244872.chunk.js",
+    "static/media/backdrop_path_nodata.jpg": "/GreenMovies/static/media/backdrop_path_nodata.d9dab80fe4b0ef73656b.jpg",
+    "static/media/bg_dim.png": "/GreenMovies/static/media/bg_dim.9823dd0c91af46826390.png",
+    "static/media/cast_nodata.svg": "/GreenMovies/static/media/cast_nodata.1ed9349857fccef694184812410d01b6.svg",
+    "static/media/icon_search.svg": "/GreenMovies/static/media/icon_search.d1a4861d0c2a86ded564.svg",
+    "index.html": "/GreenMovies/index.html",
+    "static/media/icon_list.svg": "/GreenMovies/static/media/icon_list.111101f2f0d771c6bfdc.svg",
+    "static/media/icon_arrow_link.svg": "/GreenMovies/static/media/icon_arrow_link.1d9a94f594e5faeb8053.svg",
+    "static/media/icon_menu.svg": "/GreenMovies/static/media/icon_menu.e704281af51a57a010d9.svg",
+    "static/media/icon_x.svg": "/GreenMovies/static/media/icon_x.d5b8a2155004376ee26d.svg",
+    "static/media/icon_play.svg": "/GreenMovies/static/media/icon_play.9425e617bc704ef9b8ba.svg",
+    "static/media/icon_play_on.svg": "/GreenMovies/static/media/icon_play_on.3001ac0ecf9352760470.svg",
+    "static/media/icon_arrow_swiper.svg": "/GreenMovies/static/media/icon_arrow_swiper.10e2a88da7e228f94857.svg",
+    "static/media/icon_chk_on.svg": "/GreenMovies/static/media/icon_chk_on.deca3e011497637f8794.svg",
+    "static/media/icon_chk.svg": "/GreenMovies/static/media/icon_chk.add2cc0050339b5cc885.svg",
+    "main.e157e12b.css.map": "/GreenMovies/static/css/main.e157e12b.css.map",
+    "main.672d642d.js.map": "/GreenMovies/static/js/main.672d642d.js.map",
+    "453.ad244872.chunk.js.map": "/GreenMovies/static/js/453.ad244872.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e157e12b.css",
+    "static/js/main.672d642d.js"
+  ]
+}
