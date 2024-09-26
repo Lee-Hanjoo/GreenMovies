@@ -526,16 +526,14 @@
   display: flex;
   align-items: center;
 }
-/* .swiper:not(.trailer-list) .swiper-slide {
-  max-width: 130px;
-} */
-.wrap:not(.detail) .swiper .swiper-slide {
-  cursor: pointer;
-  transition: transform 0.3s;
-}
+
+.wrap:not(.detail) .swiper .swiper-slide,
 .wrap.detail .swiper .swiper-slide .movie-item > img,
 .wrap.detail .swiper .swiper-slide .movie-item > iframe {
   cursor: pointer;
+}
+.swiper .swiper-slide {
+  transition: transform 0.3s;
 }
 .swiper .swiper-slide:hover {
   transform: translateY(-5px);

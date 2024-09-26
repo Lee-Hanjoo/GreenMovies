@@ -118,7 +118,7 @@ const Detail = () => {
                     }}
                     className={`swiper cast-list`}
                   >
-                    {cont.casts.cast.map((cast, i) => (
+                    {cont.casts.cast.slice(0, 10).map((cast, i) => (
                       <SwiperSlide>
                         <MovieItem title={cast.name} poster={cast.profile_path} />
                       </SwiperSlide>
