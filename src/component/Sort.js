@@ -25,7 +25,7 @@ const Sort = (props) => {
 
 
   return (
-    <ul className={`sort-list ${props.chk ? 'chk-type' : ''} ${props.icon ? 'icon' : ''}`}>
+    <ul className={`sort-list ${type !== 'movieTv' ? 'chk-type' : ''} ${type === 'language' ? 'icon' : ''} `}>
       {
         item.map((v,i)=>{
           return (

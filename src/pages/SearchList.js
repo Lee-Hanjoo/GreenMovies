@@ -13,8 +13,12 @@ const SearchList = () => {
   const [sortObj, setSortObj] = useState({
     movieTv: 'movie',
     language: 'en',
-    genre: '12'
+    genre: '12',
   })
+  
+  let withOriginalLanguage = sortObj.language;
+  // let sortBy = sortObj.sortBy;
+  let withTextQuery = '해리';
 
   const movieBox = document.querySelector('.movie-list-box')
   const SearchList = document.querySelector('.search-list')
@@ -22,28 +26,28 @@ const SearchList = () => {
   
   if(movieBox) {
       movieBox.addEventListener("scroll", () => {
-        if(movieBox.scrollTop > 132) {
-          header.classList.add('hidden');
+        console.log(movieBox.scrollTop);
+        if(movieBox.scrollTop > 96) {
+          header.classList.add('hide');
           SearchList.classList.add('top');
         } else {
-          header.classList.remove('hidden');
+          header.classList.remove('hide');
           SearchList.classList.remove('top');
         }
     });
   }
 
-  const getMovieTvData = async (genre, withOriginalLanguage, withTextQuery, sortBy) => {
+  const getMovieTvData = async (genre, withOriginalLanguage, withTextQuery) => {
 
     let contType = myState;
-    const res = await api.list(contType, genre, withOriginalLanguage, withTextQuery, sortBy);
+    const res = await api.list(contType, genre, withOriginalLanguage, withTextQuery);
     
     setList(res)
     setLoading(false);
   }
   
   useEffect(() => {
-    // getMovieTvData(genre, withOriginalLanguage, withTextQuery, sortBy)
-    getMovieTvData(genre)
+    getMovieTvData(genre, withOriginalLanguage, withTextQuery)
   }, [])
 
   useEffect(() => {
@@ -61,33 +65,33 @@ const SearchList = () => {
         <div className='top'>
           <div className='sort-box'>
             <Sort type={'movieTv'} list={['Movies','Tv Series']} setSortObj={setSortObj} sortObj={sortObj} />
-            <Sort type={'language'} chk icon list={['en', 'fr', 'ko', 'ja', 'zh', 'th']} setSortObj={setSortObj} sortObj={sortObj} />
+            <Sort type={'language'} list={['en', 'fr', 'ko', 'ja', 'zh', 'th']} setSortObj={setSortObj} sortObj={sortObj} />
           </div>
           <Search />
         </div>
         <div className={`bottom ${bottomOpen ? 'on' : ''}`}>
           <button type='button' className='sort-flip-btn' onClick={()=>{setBottomOpen(!bottomOpen)}}></button>
-          <Sort type={'genre'} chk multiple setSortObj={setSortObj} sortObj={sortObj} list={{
-            'adventure':12,
-            'fantasy':14,
-            'animation':16,
-            'drama':18,
-            'horror':27,
-            'action':28,
-            'comedy':35,
-            'history':36,
-            'western':37,
-            'thriller':53,
-            'crime':80,
-            'documentary':99,
-            'sf':878,
-            'mystery':9648,
-            'music':10402,
-            'romance':10749,
-            'family':10751,
-            'war':10752,
-            'tv movie':10770,
-          }}/>
+            <Sort type={'genre'} multiple setSortObj={setSortObj} sortObj={sortObj} list={{
+              'adventure':12,
+              'fantasy':14,
+              'animation':16,
+              'drama':18,
+              'horror':27,
+              'action':28,
+              'comedy':35,
+              'history':36,
+              'western':37,
+              'thriller':53,
+              'crime':80,
+              'documentary':99,
+              'sf':878,
+              'mystery':9648,
+              'music':10402,
+              'romance':10749,
+              'family':10751,
+              'war':10752,
+              'tv movie':10770,
+            }}/>
         </div>
       </div>
       <ul className='movie-list-box'>
