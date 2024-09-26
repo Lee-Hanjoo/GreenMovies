@@ -10,13 +10,11 @@ const Sort = (props) => {
   
   const [on, setOn] = useState(0)
   const [selectedItems, setSelectedItems] = useState([]);
-  const items = ['','',''];
 
   const toggleItem = (item) => {
     setSelectedItems((prevSelected) => {
       if (prevSelected.includes(item)) {
         // 이미 선택된 경우 선택 해제
-        console.log(item);
         return prevSelected.filter((i) => i !== item);
       } else {
         // 선택되지 않은 경우 선택

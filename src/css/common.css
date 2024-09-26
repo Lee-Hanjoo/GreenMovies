@@ -582,6 +582,7 @@
 }
 .detail .movie-info-wrap .title.pointer {
   cursor: pointer;
+  width: fit-content;
 }
 .detail .movie-info-wrap .desc {
   margin-top: 35px;
