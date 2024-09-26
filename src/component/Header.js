@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import store from '../state/store'
 
 const Header = ({tab, setTab}) => {
@@ -7,7 +7,16 @@ const Header = ({tab, setTab}) => {
   const { stateChange } = store();
   const [nav, setNav] = useState(false)
   const navigate = useNavigate();
+  const location = useLocation();
   const [headerHidden, setHeaderHidden] = useState(false);
+
+  const moveSearch = () => {
+    if (location.pathname === '/search') {
+      navigate(-1);
+    } else {
+      navigate('/search');
+    }
+  }
 
   window.addEventListener("scroll", ()=>{
     if(window.scrollY > 470) {
@@ -19,7 +28,7 @@ const Header = ({tab, setTab}) => {
 
   return (
     <header className={`header ${headerHidden ? 'hidden' : ''}`}>
-      <h1 className='logo' onClick={()=>{navigate('/'); stateChange('movie')}}>LOGO</h1>
+      <h1 className='logo' onClick={()=>{navigate('/'); stateChange('movie')}}>HJ CINEMA</h1>
       <nav className={`nav ${nav ? 'on' : ''}`}>
         <div className='dim' onClick={()=>{setNav(false)}}></div>
         <button type='button' className='nav-btn' onClick={()=>{setNav(!nav)}}/>
@@ -46,7 +55,7 @@ const Header = ({tab, setTab}) => {
           >TV Series</Link>
         </div>
       </nav>
-      <button type='button' className='list-btn' onClick={()=>{navigate('/search')}}></button>
+      <button type='button' className='list-btn' onClick={()=>{moveSearch()}}></button>
     </header>
   )
 }

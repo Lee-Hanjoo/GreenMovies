@@ -44,8 +44,6 @@ const Detail = () => {
   const hours = myState === 'movie' ? (cont.runtime && Math.floor(cont.runtime / 60)) : (cont.episode_run_time && Math.floor(cont.episode_run_time / 60))
   const minutes = myState === 'movie' ? (cont.runtime && cont.runtime % 60) : (cont.episode_run_time && cont.episode_run_time % 60)
 
- console.log(cont);
-
   return (
     <div className='detail wrap' 
       style={

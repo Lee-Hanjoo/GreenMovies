@@ -44,8 +44,6 @@ const Home = () => {
   const videoKey = cont.videos?.results?.[1]?.key;
   const popupVideoKey = cont.videos?.results?.[0]?.key;
 
-  console.log(popupVideoKey);
-
   // 영상 일시정지
   if(videoKey) {
     window.addEventListener("scroll", ()=>{

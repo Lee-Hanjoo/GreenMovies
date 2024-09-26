@@ -164,3 +164,6 @@ a:link, a:visited, a:hover, a:active {
 *::-webkit-scrollbar {
   display: none;
 }
+*::selection {
+  background-color: rgba(255, 236, 0, 0.3);
+}

@@ -16,6 +16,22 @@ const SearchList = () => {
     genre: '12'
   })
 
+  const movieBox = document.querySelector('.movie-list-box')
+  const SearchList = document.querySelector('.search-list')
+  const header = document.querySelector('.header')
+  
+  if(movieBox) {
+      movieBox.addEventListener("scroll", () => {
+        if(movieBox.scrollTop > 132) {
+          header.classList.add('hidden');
+          SearchList.classList.add('top');
+        } else {
+          header.classList.remove('hidden');
+          SearchList.classList.remove('top');
+        }
+    });
+  }
+
   const getMovieTvData = async (genre, withOriginalLanguage, withTextQuery, sortBy) => {
 
     let contType = myState;

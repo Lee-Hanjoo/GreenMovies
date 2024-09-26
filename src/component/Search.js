@@ -6,7 +6,7 @@ const Search = () => {
 
   return (
     <div className={`search-box ${search ? 'on' : ''}`}>
-      <input type='text' className='search-input'></input>
+      <input type='text' className='search-input' placeholder='Search...'/>
       <button type='button' className='search-btn' onClick={()=>{setSearch(true)}}/>
     </div>
   )

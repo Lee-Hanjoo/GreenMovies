@@ -93,7 +93,7 @@ const List = ({tab, setTab}) => {
           <div className='genre-wrap'>
             <TextList lang={`${movies[storeMovieIdx].original_language}`}>
               {cont && cont.genres && cont.genres.length > 0 ? (
-                cont.genres.map((genre, i) => (
+                cont.genres.slice(0, 3).map((genre, i) => (
                   <li key={i}>{genre.name}</li>
                 ))
                 ) : (
@@ -107,7 +107,17 @@ const List = ({tab, setTab}) => {
               myState === 'tv' ? movies[storeMovieIdx].name : movies[storeMovieIdx].title
             }
           </h2>
-          <p className='desc'>{movies[storeMovieIdx].overview}</p>
+          <p className='desc'>
+            {
+              movies[storeMovieIdx].overview !== "" ?
+                movies[storeMovieIdx].overview
+              :
+                myState === 'tv' ? 
+                'It is a program named ' + "'" + movies[storeMovieIdx].name + "', It is loved by many people and is one of the popular programs."
+                  :
+                  movies[storeMovieIdx].title
+            }
+          </p>
         </div>
         <div className='tab-wrap'>
           <ul className='tab'>
