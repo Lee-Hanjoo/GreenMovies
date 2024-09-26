@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/GreenMovies/static/css/main.71844193.css",
-    "main.js": "/GreenMovies/static/js/main.9d52a0d9.js",
+    "main.css": "/GreenMovies/static/css/main.5937f3a9.css",
+    "main.js": "/GreenMovies/static/js/main.fd78277e.js",
     "static/js/453.ad244872.chunk.js": "/GreenMovies/static/js/453.ad244872.chunk.js",
     "static/media/backdrop_path_nodata.jpg": "/GreenMovies/static/media/backdrop_path_nodata.d9dab80fe4b0ef73656b.jpg",
     "static/media/bg_dim.png": "/GreenMovies/static/media/bg_dim.9823dd0c91af46826390.png",
@@ -17,12 +17,12 @@
     "static/media/icon_arrow_swiper.svg": "/GreenMovies/static/media/icon_arrow_swiper.10e2a88da7e228f94857.svg",
     "static/media/icon_chk_on.svg": "/GreenMovies/static/media/icon_chk_on.deca3e011497637f8794.svg",
     "static/media/icon_chk.svg": "/GreenMovies/static/media/icon_chk.add2cc0050339b5cc885.svg",
-    "main.71844193.css.map": "/GreenMovies/static/css/main.71844193.css.map",
-    "main.9d52a0d9.js.map": "/GreenMovies/static/js/main.9d52a0d9.js.map",
+    "main.5937f3a9.css.map": "/GreenMovies/static/css/main.5937f3a9.css.map",
+    "main.fd78277e.js.map": "/GreenMovies/static/js/main.fd78277e.js.map",
     "453.ad244872.chunk.js.map": "/GreenMovies/static/js/453.ad244872.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.71844193.css",
-    "static/js/main.9d52a0d9.js"
+    "static/css/main.5937f3a9.css",
+    "static/js/main.fd78277e.js"
   ]
 }
