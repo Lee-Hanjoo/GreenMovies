@@ -101,7 +101,7 @@ const Home = ({tab, setTab}) => {
                 stateChange('movie');
                 setTab('trend');
               }}
-            >TRENDING MOVIES</p>
+            >TOP 10 : TRENDING MOVIES</p>
             <Swiper
               onSwiper={setSwiperInstance}
               initialSlide={storeMovieIdx}
@@ -124,7 +124,7 @@ const Home = ({tab, setTab}) => {
               }}
               className={`swiper`}
             >
-              {main?.movieTrending?.map((movie, i) => 
+              {main?.movieTrending?.slice(0, 10).map((movie, i) => 
                 <SwiperSlide key={movie.id} 
                   onClick={()=>{
                     navigate(`/detail/${movie.id}`);
@@ -143,7 +143,7 @@ const Home = ({tab, setTab}) => {
                 stateChange('movie');
                 setTab('top');
               }}
-            >TOPRATED MOVIES</p>
+            >TOP 10 : TOPRATED MOVIES</p>
             <Swiper
               onSwiper={setSwiperInstance}
               initialSlide={storeMovieIdx}
@@ -166,7 +166,7 @@ const Home = ({tab, setTab}) => {
               }}
               className={`swiper`}
             >
-              {main?.movieToprated?.map((movie, i) => (
+              {main?.movieToprated?.slice(0, 10).map((movie, i) => (
                 <SwiperSlide key={movie.id} 
                   onClick={()=>{
                     navigate(`/detail/${movie.id}`);
@@ -185,7 +185,7 @@ const Home = ({tab, setTab}) => {
                 stateChange('tv');
                 setTab('trend');
               }}
-            >TRENDING TV SERIES</p>
+            >TOP 10 : TRENDING TV SERIES</p>
             <Swiper
               onSwiper={setSwiperInstance}
               initialSlide={storeMovieIdx}
@@ -208,7 +208,7 @@ const Home = ({tab, setTab}) => {
               }}
               className={`swiper`}
             >
-              {main?.tvTrending?.map((tv, i) => (
+              {main?.tvTrending?.slice(0, 10).map((tv, i) => (
                 <SwiperSlide key={tv.id}
                   onClick={()=>{
                     navigate(`/detail/${tv.id}`);
@@ -227,7 +227,7 @@ const Home = ({tab, setTab}) => {
                 stateChange('tv');
                 setTab('top');
               }}
-            >TOPRATED TVSERIES</p>
+            >TOP 10 : TOPRATED TVSERIES</p>
             <Swiper
               onSwiper={setSwiperInstance}
               initialSlide={storeMovieIdx}
@@ -250,7 +250,7 @@ const Home = ({tab, setTab}) => {
               }}
               className={`swiper`}
             >
-              {main?.tvToprated?.map((tv, i) => (
+              {main?.tvToprated?.slice(0, 10).map((tv, i) => (
                 <SwiperSlide key={tv.id}
                   onClick={()=>{
                     navigate(`/detail/${tv.id}`);

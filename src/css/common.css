@@ -302,8 +302,30 @@
   background: url('../../public/assets/imgs/icon/icon_arrow.svg') no-repeat center;
   transition: all 0.2s;
 }
+.home .cont-box > .title::before {
+  content: 'MORE';
+  display: inline-block;
+  visibility: hidden;
+  opacity: 0;
+  width: 80px;
+  height: 20px;
+  position: absolute;
+  right: -80px;
+  top: 6px;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+.home .cont-box > .title:hover::before {
+  right: -100px;
+  visibility: visible;
+  opacity: 1;
+  color: #FFEC15;
+}
 .home .cont-box > .title:hover::after {
+  width: 100px;
+  right: -118px;
   transform: rotate(45deg);
+  background-image: url('../../public/assets/imgs/icon/icon_arrow_on.svg');
 }
 
 .home .swiper {
