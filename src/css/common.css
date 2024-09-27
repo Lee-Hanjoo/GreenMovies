@@ -289,7 +289,23 @@
   font-weight: 700;
   font-size: 20px;
   z-index: 2;
+  cursor: pointer;
 }
+.home .cont-box > .title::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: -30px;
+  top: 4px;
+  background: url('../../public/assets/imgs/icon/icon_arrow.svg') no-repeat center;
+  transition: all 0.2s;
+}
+.home .cont-box > .title:hover::after {
+  transform: rotate(45deg);
+}
+
 .home .swiper {
   width: calc(100% + 150px);
   margin-left: -150px;
@@ -542,7 +558,7 @@
 .swiper-button-prev {
   top: 14px !important;
   left: auto !important;
-  right: 205px !important;
+  right: calc(9% + 50px) !important;
 }
 .swiper-button-prev::after {
   font-size: 0 !important;
@@ -555,7 +571,7 @@
 .swiper-button-next {
   top: 14px !important;
   left: auto !important;
-  right: 155px !important;
+  right: 9% !important;
 }
 .swiper-button-next::after {
   font-size: 0 !important;

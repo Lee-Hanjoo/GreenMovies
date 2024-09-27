@@ -8,7 +8,7 @@ import 'swiper/css/navigation';
 import { api } from '../api/tmdb';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const Home = () => {
+const Home = ({tab, setTab}) => {
 
   const {main, setMain, setStoreMovieIdx, storeMovieIdx, stateChange, cont, setCont} = store();
   const [swiperInstance, setSwiperInstance] = useState(null);
@@ -95,7 +95,13 @@ const Home = () => {
         </div>
         <div className='container'>
           <div className='cont-box'>
-            <p className='title'>TRENDING MOVIES</p>
+            <p className='title'
+              onClick={()=>{
+                navigate(`/list`);
+                stateChange('movie');
+                setTab('trend');
+              }}
+            >TRENDING MOVIES</p>
             <Swiper
               onSwiper={setSwiperInstance}
               initialSlide={storeMovieIdx}
@@ -131,7 +137,13 @@ const Home = () => {
             </Swiper>
           </div>
           <div className='cont-box'>
-            <p className='title'>TOPRATED MOVIES</p>
+            <p className='title'
+              onClick={()=>{
+                navigate(`/list`);
+                stateChange('movie');
+                setTab('top');
+              }}
+            >TOPRATED MOVIES</p>
             <Swiper
               onSwiper={setSwiperInstance}
               initialSlide={storeMovieIdx}
@@ -167,7 +179,13 @@ const Home = () => {
             </Swiper>
           </div>
           <div className='cont-box'>
-            <p className='title'>TRENDING TV SERIES</p>
+            <p className='title'
+              onClick={()=>{
+                navigate(`/list`);
+                stateChange('tv');
+                setTab('trend');
+              }}
+            >TRENDING TV SERIES</p>
             <Swiper
               onSwiper={setSwiperInstance}
               initialSlide={storeMovieIdx}
@@ -203,7 +221,13 @@ const Home = () => {
             </Swiper>
           </div>
           <div className='cont-box'>
-            <p className='title'>TOPRATED TVSERIES</p>
+            <p className='title'
+              onClick={()=>{
+                navigate(`/list`);
+                stateChange('tv');
+                setTab('top');
+              }}
+            >TOPRATED TVSERIES</p>
             <Swiper
               onSwiper={setSwiperInstance}
               initialSlide={storeMovieIdx}

@@ -33,7 +33,7 @@ function App() {
       <Router>
         <Header tab={tab} setTab={setTab} />
         <Routes>
-          <Route path='/' element={<Home />}/>
+          <Route path='/' element={<Home tab={tab} setTab={setTab} />}/>
           <Route path='/list' element={<List tab={tab} setTab={setTab} />}/>
           <Route path='/detail/:id' element={<Detail />}/>
           <Route path='/search' element={<SearchList  />}/>
