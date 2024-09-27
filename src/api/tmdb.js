@@ -32,18 +32,13 @@ export const api = {
     });
     return res.data;
   },
-  list:async (t, genre, withOriginalLanguage, withTextQuery)=>{
-    // with_genres: 28
-    // with_original_language: 'en'
-    // with_text_query: '해리포터'
-    // sort_by : 최신순 release_date.desc
-    // sort_by : 인기순 popularity.desc
+  list:async (t, genre, withOriginalLanguage, withTextQuery, sortBy)=>{
     const res = await instance.get(`/discover/${t}`,{
       params:{
         with_genres: genre,
         with_original_language: withOriginalLanguage,
         with_text_query: withTextQuery,
-        // sort_by: sortBy
+        sort_by: sortBy,
       }
     });
     return res.data.results;

@@ -596,20 +596,12 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  gap: 50px 24px;
 }
 .search-list .movie-list-box li {
   width: calc((100% / 6) - 20px);
   min-width: 144px;
   cursor: pointer;
-}
-.search-list .movie-list-box li {
-  margin-left: 24px;
-}
-.search-list .movie-list-box li:nth-child(6n+1) {
-  margin-left: 0;
-}
-.search-list .movie-list-box li:nth-child(n+7) {
-  margin-top: 50px;
 }
 .movie-item .title {
   margin-top: 15px;

@@ -4,12 +4,12 @@ import store from '../state/store';
 const Sort = (props) => {
   const { sortObj, setSortObj, type } = props
   const {stateChange, setGenre} = store();
+  const [on, setOn] = useState(0);
+  const [selectedItems, setSelectedItems] = useState([]);
+
 
   let item = Object.keys(props.list)
   let value = Object.values(props.list)
-  
-  const [on, setOn] = useState(0)
-  const [selectedItems, setSelectedItems] = useState([]);
 
   const toggleItem = (item) => {
     setSelectedItems((prevSelected) => {
@@ -23,32 +23,35 @@ const Sort = (props) => {
     });
   };
 
-
+  
   return (
     <ul className={`sort-list ${type !== 'movieTv' ? 'chk-type' : ''} ${type === 'language' ? 'icon' : ''} `}>
       {
         item.map((v,i)=>{
           return (
             <li key={i} 
-              className={`${selectedItems.includes(item[i]) ? 'selected' : ''} ${on === i ? 'on' : ''}`} 
-              onClick={()=>{
+            className={`${selectedItems.includes(item[i]) ? 'selected' : ''} ${type !== 'genre' && on === i ? 'on' : ''}`} 
+            onClick={(e)=>{
                 if(type === 'movieTv') {
-                  setSortObj({...sortObj, [type]: v === 'Movies' ? 'movie' : 'tv'})
+                  setSortObj({...sortObj, [type]: value[i] === 'Movies' ? 'movie' : 'tv'})
+                  stateChange(value[i] === 'Movies' ? 'movie' : 'tv')
                 } else if(type === 'language') {
                   setSortObj({...sortObj, [type]: value[i]})
-                } else {
-                  let genreArr = sortObj.genre.split(',')
-                  if(genreArr.includes(value[i])) {
-                    genreArr = genreArr.filter((vv) => vv !== value[i])
+                } else if(type === 'genre') {
+                  let genreArr = sortObj.genre.split(',');
+                  if(genreArr.includes(String(value[i]))) {
+                    genreArr = genreArr.filter((vv) => vv !== String(value[i]))
                   } else {
                     genreArr.push(value[i])
                   }
-                  setSortObj({...sortObj, [type]: genreArr.join(',')})
+                  //                              genreArr[0]는 처음엔 ''이고, 누르면 genreArr[0]에 처음 누른 genre의 값이 들어감.
+                  setSortObj({...sortObj, [type]: genreArr[0]===''?genreArr.join(''):genreArr.join(',')})
+                  setGenre(value[i])
+                // } else {
+                //   setSortObj({...sortObj, [type]: value[i] === 'new' ? 'release_date.desc' : 'popularity.desc'})
                 }
                 setOn(i)
-                { props.multiple && toggleItem(item[i]) }
-                { type === 'moveiTv' && stateChange(sortObj.movieTv)}
-                { type === 'genre' && setGenre(value[i]) }
+                { type === 'genre' && toggleItem(item[i]) }
               }}
             >{type === 'genre' ? v : value[i]}</li>
           )

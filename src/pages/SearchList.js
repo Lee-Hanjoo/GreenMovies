@@ -4,21 +4,74 @@ import Sort from '../component/Sort';
 import Search from '../component/Search';
 import store from '../state/store';
 import { api } from '../api/tmdb';
+import { useNavigate } from 'react-router-dom';
 
 const SearchList = () => {
-
-  let {myState, list, setList, genre} = store();
+  
+  let {myState, stateChange, list, setList} = store();
   const [loading, setLoading] = useState(false);
   const [bottomOpen, setBottomOpen] = useState(false);
+  const navigate = useNavigate();
+  const searchInput = useRef('');
+  let baseGenre = '';
   const [sortObj, setSortObj] = useState({
     movieTv: 'movie',
     language: 'en',
-    genre: '12',
+    genre: baseGenre,
+    // sortBy: 'popularity.desc'
   })
+
+  // 장르 리스트
+  // 공통값
+  const baseGenres = {
+    'animation': 16,
+    'action': 28,
+    'comedy': 35,
+    'crime': 80,
+    'documentary': 99,
+    'drama': 18,
+    'family': 10751,
+    'mystery': 9648,
+    'western': 37,
+  };
+
+  const movieGenres = {
+    'adventure': 12,
+    'music': 10402,
+    'fantasy': 14,
+    'horror': 27,
+    'history': 36,
+    'romance': 10749,
+    'sf': 878,
+    'thriller': 53,
+    'tv movie': 10770,
+    'war': 10752,
+  };
+
+  const tvGenres = {
+    'Action & Adventure': 10759,
+    'Kids': 10762,
+    'News': 10763,
+    'Reality': 10764,
+    'Sci-Fi & Fantasy': 10765,
+    'Soap': 10766,
+    'Talk': 10767,
+    'War & Politics': 10768,
+  };
+
+  const getGenres = () => {
+    if (sortObj.movieTv === 'movie') {
+      return { ...baseGenres, ...movieGenres }; // movie일 때 기본값 + movie 장르
+    } else {
+      return { ...baseGenres, ...tvGenres };    // tv일 때 기본값 + tv 장르
+    }
+  };
   
+  const genreList = getGenres();
+
   let withOriginalLanguage = sortObj.language;
-  // let sortBy = sortObj.sortBy;
-  let withTextQuery = '해리';
+  let sortBy = sortObj.sortBy;
+  let withTextQuery = searchInput.current.value;
 
   const movieBox = document.querySelector('.movie-list-box')
   const SearchList = document.querySelector('.search-list')
@@ -26,7 +79,6 @@ const SearchList = () => {
   
   if(movieBox) {
       movieBox.addEventListener("scroll", () => {
-        console.log(movieBox.scrollTop);
         if(movieBox.scrollTop > 96) {
           header.classList.add('hide');
           SearchList.classList.add('top');
@@ -37,22 +89,26 @@ const SearchList = () => {
     });
   }
 
-  const getMovieTvData = async (genre, withOriginalLanguage, withTextQuery) => {
+  const getMovieTvData = async (myState, genre, withOriginalLanguage, withTextQuery, sortBy) => {
 
-    let contType = myState;
-    const res = await api.list(contType, genre, withOriginalLanguage, withTextQuery);
+    let contType = sortObj.movieTv;
+    const res = await api.list(contType, genre, withOriginalLanguage, withTextQuery, sortBy);
     
     setList(res)
     setLoading(false);
   }
   
   useEffect(() => {
-    getMovieTvData(genre, withOriginalLanguage, withTextQuery)
-  }, [])
+    getMovieTvData(myState, sortObj.genre, withOriginalLanguage, withTextQuery, sortBy)
+  }, [list])
 
   useEffect(() => {
-    console.log(`sortObj`, sortObj)
-  }, [sortObj])
+    if(myState === 'movie'){
+      baseGenre = '28'
+    } else {
+      baseGenre = '10759'
+    }
+  }, [sortObj, myState])
   
   if (loading) {
     return <div>Loading...</div>
@@ -65,38 +121,26 @@ const SearchList = () => {
         <div className='top'>
           <div className='sort-box'>
             <Sort type={'movieTv'} list={['Movies','Tv Series']} setSortObj={setSortObj} sortObj={sortObj} />
-            <Sort type={'language'} list={['en', 'fr', 'ko', 'ja', 'zh', 'th']} setSortObj={setSortObj} sortObj={sortObj} />
+            {/* <Sort type={'by'} list={['new', ${}]} setSortObj={setSortObj} sortObj={sortObj} /> */}
+            <Sort type={'language'} list={['en', 'fr', 'ko', 'ja', 'zh']} setSortObj={setSortObj} sortObj={sortObj} />
           </div>
-          <Search />
+          <Search searchInput={searchInput}/>
         </div>
         <div className={`bottom ${bottomOpen ? 'on' : ''}`}>
           <button type='button' className='sort-flip-btn' onClick={()=>{setBottomOpen(!bottomOpen)}}></button>
-            <Sort type={'genre'} multiple setSortObj={setSortObj} sortObj={sortObj} list={{
-              'adventure':12,
-              'fantasy':14,
-              'animation':16,
-              'drama':18,
-              'horror':27,
-              'action':28,
-              'comedy':35,
-              'history':36,
-              'western':37,
-              'thriller':53,
-              'crime':80,
-              'documentary':99,
-              'sf':878,
-              'mystery':9648,
-              'music':10402,
-              'romance':10749,
-              'family':10751,
-              'war':10752,
-              'tv movie':10770,
-            }}/>
+            <Sort type={'genre'} multiple setSortObj={setSortObj} sortObj={sortObj} list={
+              genreList
+            }/>
         </div>
       </div>
       <ul className='movie-list-box'>
         {list.map((movie, i) => (
-          <li key={i} onClick={()=>{}}>
+          <li key={i} 
+            onClick={()=>{
+              navigate(`/detail/${movie.id}`);
+              stateChange(sortObj.movieTv);
+            }}
+          >
             <MovieItem title={movie.title} poster={movie.poster_path}/>
           </li>
         ))}
