@@ -28,7 +28,7 @@ const Header = ({tab, setTab}) => {
 
   return (
     <header className={`header ${headerHidden ? 'hidden' : ''}`}>
-      <h1 className='logo' onClick={()=>{navigate('/'); stateChange('movie')}}>HJ CINEMA</h1>
+      <h1 className='logo' onClick={()=>{navigate('/'); stateChange('movie')}}>CINEMA</h1>
       <nav className={`nav ${nav ? 'on' : ''}`}>
         <div className='dim' onClick={()=>{setNav(false)}}></div>
         <button type='button' className='nav-btn' onClick={()=>{setNav(!nav)}}/>

@@ -57,7 +57,7 @@ const Detail = () => {
         <div className='movie-info-wrap'>
           <div className='genre-wrap'>
           <TextList lang={`${cont.original_language}`}>
-            {cont.genres.map((genre,i)=>(
+            {cont.genres.slice(0, 5).map((genre,i)=>(
               <li>{genre.name}</li>
             ))}
           </TextList>
