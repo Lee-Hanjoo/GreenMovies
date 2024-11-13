@@ -41,8 +41,8 @@ const Home = ({tab, setTab}) => {
     return <div>Loading...</div>;
   }
 
-  const videoKey = cont.videos?.results?.[1]?.key;
-  const popupVideoKey = cont.videos?.results?.[0]?.key;
+  const videoKey = cont.videos?.results?.[0]?.key;
+  const popupVideoKey = cont.videos?.results?.[1]?.key;
 
   if(!cont || !videoKey || !popupVideoKey) return;
 

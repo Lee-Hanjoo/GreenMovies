@@ -1,0 +1,145 @@
+@media screen and (max-width:1450px) {
+  .genre-wrap {
+    margin-bottom: 20px;
+  }
+  .text-list li {
+    font-size: 20px;
+  }
+  .play-btn {
+    width: 115px;
+    height: 115px;
+    background-size: 115px;
+  }
+  .list .rating-wrap {
+    margin-bottom: 80px;
+  }
+  .movie-info-wrap {
+    width: calc((100% / 2) - 80px);
+  }
+  .tab-wrap {
+    width: calc(100% / 2);
+    margin-left: 80px;
+  }
+  .movie-info-wrap .title {
+    font-size: 60px;
+    line-height: 75px;
+    min-height: 150px;
+  }
+  .movie-info-wrap .desc {
+    margin-top: 35px;
+    font-size: 16px;
+    line-height: 26px;
+  }
+  .detail .movie-info-wrap .desc {
+    margin-top: 35px;
+    font-size: 16px;
+    line-height: 26px;
+  }
+  .tab li {
+    font-size: 20px;
+  }
+  .swiper .swiper-wrapper {
+    padding-top: 48px;
+  }
+  .rating-wrap p:first-of-type {
+    font-size: 20px;
+  }
+  .rating-wrap p:last-of-type {
+    font-size: 24px;
+  }
+  .poster-btn {
+    font-size: 12px;
+    padding: 9px 30px 9px 15px;
+    background-size: 15px;
+    background-position: center right 12px;
+  }
+}
+@media screen and (max-width:1240px) {
+  .container {
+    width: calc(100% - 64px);
+    left: 64px;
+  }
+  .tab li {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width:1120px) {
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .play-btn {
+    width: 80px;
+    height: 80px;
+    background-size: 80px;
+    top: 17%
+  }
+  .movie-info-wrap {
+    width: calc(100% - 64px);
+  }
+  .movie-info-wrap .title {
+    font-size: 40px;
+    line-height: 55px;
+    min-height: auto;
+  }
+  .movie-info-wrap .desc {
+    margin-top: 20px;
+  }
+  .list .rating-wrap {
+    margin-bottom: 60px;
+  }
+  .tab-wrap {
+    width: 100%;
+    margin-left: 0;
+  }
+
+}
+@media screen and (max-width:1024px) {
+  .home .tag-list {
+    margin-bottom: 20px;
+  }
+  .home .video .video-txt {
+    max-width: 480px;
+    left: 64px;
+    bottom: 165px;
+  }
+  .home .video .video-txt .title {
+    margin-bottom: 15px;
+    font-size: 55px;
+    line-height: 60px;
+  }
+  .home .video iframe {
+    left: 0%;
+  }
+  .btn-wrap {
+    margin-top: 35px;
+  }
+  .home .cont-box > .title {
+    left: 64px;
+  }
+  .home .swiper {
+    width: calc(100% + 236px);
+    margin-left: -236px;
+    padding-left: 300px;
+  }
+}
+@media screen and (max-width:768px) {
+  .movie-info-wrap .title {
+    font-size: 30px;
+    line-height: 45px;
+  }
+  .text-list li {
+    font-size: 16px;
+  }
+  .text-list .lang {
+    font-size: 12px;
+    padding: 3px 12px;
+    margin-left: 12px;
+  }
+  .movie-info-wrap .desc {
+    margin-top: 15px;
+  }
+  .genre-wrap {
+    margin-bottom: 10px;
+  }
+}

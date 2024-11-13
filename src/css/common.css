@@ -221,14 +221,14 @@
 .home .video .video-txt {
   max-width: 600px;
   position: absolute;
-  left: 150px;
+  left: 120px;
   bottom: 195px;
   z-index: 2;
 }
 .home .video .video-txt .title {
-  font-size: 75px;
+  font-size: 70px;
   font-weight: 900;
-  line-height: 60px;
+  line-height: 70px;
   margin-bottom: 25px;
 }
 .home .video .video-txt .desc {
@@ -282,9 +282,12 @@
   position: relative;
   margin-bottom: 50px;
 }
+.home .cont-box:last-of-type {
+  margin-bottom: 120px;
+}
 .home .cont-box > .title {
   position: absolute;
-  left: 150px;
+  left: 120px;
   top: 0;
   font-weight: 700;
   font-size: 20px;
@@ -329,8 +332,8 @@
 }
 
 .home .swiper {
-  width: calc(100% + 150px);
-  margin-left: -150px;
+  width: calc(100% + 180px);
+  margin-left: -180px;
   padding-left: 300px;
 }
 .home .swiper .swiper-wrapper {
@@ -434,12 +437,12 @@
   transition: all 0.3s;
 }
 .container {
-  width: calc(100% - 150px);
+  width: calc(100% - 120px);
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   position: absolute;
-  left: 150px;
+  left: 120px;
   bottom: 80px;
   z-index: 2;
 }
@@ -678,9 +681,10 @@
   margin-top: 35px;
 }
 .detail .container {
-  width: calc(100% - 150px);
+  width: calc(100% - 120px);
   align-items: flex-start;
   flex-direction: column;
+  bottom: 40px;
 }
 .detail .side-menu-wrap {
   position: absolute;

@@ -58,7 +58,7 @@ const Detail = () => {
           <div className='genre-wrap'>
           <TextList lang={`${cont.original_language}`}>
             {cont.genres.slice(0, 5).map((genre,i)=>(
-              <li>{genre.name}</li>
+              <li key={i}>{genre.name}</li>
             ))}
           </TextList>
           </div>
@@ -119,7 +119,7 @@ const Detail = () => {
                     className={`swiper cast-list`}
                   >
                     {cont.casts.cast.slice(0, 10).map((cast, i) => (
-                      <SwiperSlide>
+                      <SwiperSlide key={i}>
                         <MovieItem title={cast.name} poster={cast.profile_path} />
                       </SwiperSlide>
                     ))
@@ -152,7 +152,7 @@ const Detail = () => {
                   className={`swiper season-list`}
                 >
                   {cont.seasons.map((season, i) => (
-                    <SwiperSlide>
+                    <SwiperSlide key={i}>
                       <MovieItem title={season.name} poster={season.poster_path}/>
                     </SwiperSlide>
                   ))}
@@ -172,7 +172,7 @@ const Detail = () => {
                 className={`swiper trailer-list`}
               >
                 {cont.videos.results.slice(0, 5).map((video, i) => (
-                  <SwiperSlide>
+                  <SwiperSlide key={i}>
                     <MovieItem trailer title={video.name} poster={video.key} />
                   </SwiperSlide>
                 ))}

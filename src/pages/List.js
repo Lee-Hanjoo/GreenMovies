@@ -145,6 +145,7 @@ const List = ({tab, setTab}) => {
               navigation={true} 
               modules={[Navigation]} 
               spaceBetween={25}
+              slidesPerView={3.5}
               onSlideChange={(v) => {
                 const newIndex = v.activeIndex;
                 if (newIndex >= 0 && newIndex < movies.length) {
@@ -153,10 +154,13 @@ const List = ({tab, setTab}) => {
                 }
               }}
               breakpoints={{
-                479: {
-                  slidesPerView: 2.5
+                568: {
+                  slidesPerView: 4.5
                 },
                 767: {
+                  slidesPerView: 6.5
+                },
+                1121: {
                   slidesPerView: 3.5
                 },
                 1279: {
