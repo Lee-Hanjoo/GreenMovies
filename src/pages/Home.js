@@ -115,7 +115,7 @@ const Home = ({tab, setTab}) => {
                 479: {
                   slidesPerView: 3.5
                 },
-                767: {
+                769: {
                   slidesPerView: 5.5
                 },
                 1279: {
@@ -157,7 +157,7 @@ const Home = ({tab, setTab}) => {
                 479: {
                   slidesPerView: 3.5
                 },
-                767: {
+                769: {
                   slidesPerView: 5.5
                 },
                 1279: {
@@ -199,7 +199,7 @@ const Home = ({tab, setTab}) => {
                 479: {
                   slidesPerView: 3.5
                 },
-                767: {
+                769: {
                   slidesPerView: 5.5
                 },
                 1279: {
@@ -241,7 +241,7 @@ const Home = ({tab, setTab}) => {
                 479: {
                   slidesPerView: 3.5
                 },
-                767: {
+                769: {
                   slidesPerView: 5.5
                 },
                 1279: {

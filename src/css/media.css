@@ -5,10 +5,22 @@
   .text-list li {
     font-size: 20px;
   }
+  .text-list li:not(:last-of-type) {
+    margin-right: 10px;
+  }
+  .text-list li:not(:last-of-type)::after {
+    margin-left: 10px;
+    height: 14px;
+  }
   .play-btn {
     width: 115px;
     height: 115px;
     background-size: 115px;
+  }
+  .play-btn:hover {
+    width: 130px;
+    height: 130px;
+    background-size: 130px;
   }
   .list .rating-wrap {
     margin-bottom: 80px;
@@ -25,26 +37,26 @@
     line-height: 75px;
     min-height: 150px;
   }
-  .movie-info-wrap .desc {
+  .movie-info-wrap .desc, .detail .movie-info-wrap .desc {
     margin-top: 35px;
     font-size: 16px;
     line-height: 26px;
   }
-  .detail .movie-info-wrap .desc {
-    margin-top: 35px;
-    font-size: 16px;
-    line-height: 26px;
-  }
-  .tab li {
+  .tab li, .bottom-wrap .label {
     font-size: 20px;
   }
   .swiper .swiper-wrapper {
     padding-top: 48px;
   }
-  .rating-wrap p:first-of-type {
+  .swiper-button-prev::after, .swiper-button-next::after {
+    width: 26px;
+    height: 26px;
+    background-size: 26px !important;
+  }
+  .rating-wrap p:first-of-type, .detail .rating-wrap p:first-of-type {
     font-size: 20px;
   }
-  .rating-wrap p:last-of-type {
+  .rating-wrap p:last-of-type, .detail .rating-wrap p:last-of-type {
     font-size: 24px;
   }
   .poster-btn {
@@ -53,14 +65,31 @@
     background-size: 15px;
     background-position: center right 12px;
   }
+  .bottom-wrap {
+    margin-top: 50px;
+  }
 }
 @media screen and (max-width:1240px) {
   .container {
     width: calc(100% - 64px);
     left: 64px;
   }
-  .tab li {
+  .search-list {
+    padding: 150px 64px 0 64px;
+  }
+  .tab li, .bottom-wrap .label {
     font-size: 16px;
+  }
+  .swiper .swiper-wrapper {
+    padding-top: 40px;
+  }
+  .swiper-button-prev::after, .swiper-button-next::after {
+    width: 22px;
+    height: 22px;
+    background-size: 22px !important;
+  }
+  .bottom-wrap {
+    width: calc(100% + 64px);
   }
 }
 @media screen and (max-width:1120px) {
@@ -72,18 +101,36 @@
     width: 80px;
     height: 80px;
     background-size: 80px;
-    top: 17%
+    top: 21.5%
+  }
+  .play-btn:hover {
+    width: 100px;
+    height: 100px;
+    background-size: 100px;
+  }
+  .poster-btn {
+    margin-bottom: 5px;
   }
   .movie-info-wrap {
     width: calc(100% - 64px);
+  }
+  .detail .movie-info-wrap {
+    width: 100%;
   }
   .movie-info-wrap .title {
     font-size: 40px;
     line-height: 55px;
     min-height: auto;
   }
-  .movie-info-wrap .desc {
+  .movie-info-wrap .desc, .detail .movie-info-wrap .desc {
     margin-top: 20px;
+  }
+  .detail .side-menu-wrap {
+    right: 0;
+    top: -100px;
+  }
+  .detail .rating-wrap {
+    margin-bottom: 0;
   }
   .list .rating-wrap {
     margin-bottom: 60px;
@@ -92,7 +139,12 @@
     width: 100%;
     margin-left: 0;
   }
-
+  .bottom-wrap {
+    width: calc(100% + 64px);
+  }
+  .popup *:first-child {
+    width: 40%;
+  }
 }
 @media screen and (max-width:1024px) {
   .home .tag-list {
@@ -116,6 +168,22 @@
   }
   .home .cont-box > .title {
     left: 64px;
+    font-size: 16px;
+  }
+  .home .cont-box > .title::before {
+    width: 86px;
+    height: 16px;
+  }
+  .home .cont-box > .title::after {
+    width: 16px;
+    height: 16px;
+  }
+  .home .cont-box > .title:hover::before {
+    right: -96px;
+    top: 4px;
+  }
+  .home .cont-box > .title:hover::after {
+    right: -106px;
   }
   .home .swiper {
     width: calc(100% + 236px);
@@ -123,7 +191,20 @@
     padding-left: 300px;
   }
 }
+@media screen and (max-width:910px) {
+  .search-list-top-wrap .top .sort-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
 @media screen and (max-width:768px) {
+  .home .video iframe {
+    left: -30%;
+  }
+  .home .video .video-txt {
+    max-width: 416px;
+  }
   .movie-info-wrap .title {
     font-size: 30px;
     line-height: 45px;
@@ -136,10 +217,52 @@
     padding: 3px 12px;
     margin-left: 12px;
   }
+  .rating-wrap p:first-of-type, .detail .rating-wrap p:first-of-type {
+    font-size: 16px;
+  }
+  .rating-wrap p:last-of-type, .detail .rating-wrap p:last-of-type {
+    font-size: 20px;
+  }
   .movie-info-wrap .desc {
     margin-top: 15px;
   }
   .genre-wrap {
     margin-bottom: 10px;
+  }
+  .text-list li:not(:last-of-type)::after {
+    height: 12px;
+  }
+  .popup *:first-child {
+    width: 50%;
+  }
+  .swiper-button-prev {
+    top: 23px !important;
+    right: 95px !important;
+  }
+  .swiper-button-next {
+    top: 23px !important;
+    right: 45px !important;
+  }
+  .search-box .search-input {
+    width: 120px;
+  }
+}
+@media screen and (max-width:620px) {
+  .search-list-top-wrap .top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .search-box {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .search-box .search-input {
+    width: calc(100% - 32px);
+    text-align: left;
+  }
+}
+@media screen and (max-width:550px) {
+  .home .video .video-txt {
+    max-width: 352px;
   }
 }

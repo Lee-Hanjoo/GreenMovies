@@ -157,7 +157,7 @@ const List = ({tab, setTab}) => {
                 568: {
                   slidesPerView: 4.5
                 },
-                767: {
+                769: {
                   slidesPerView: 6.5
                 },
                 1121: {

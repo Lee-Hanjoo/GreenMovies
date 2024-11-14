@@ -581,7 +581,8 @@
 }
 
 .swiper-button-prev {
-  top: 14px !important;
+  height: fit-content !important;
+  top: 20px !important;
   left: auto !important;
   right: calc(9% + 50px) !important;
 }
@@ -594,7 +595,8 @@
   transform: rotate(180deg);
 }
 .swiper-button-next {
-  top: 14px !important;
+  height: fit-content !important;
+  top: 20px !important;
   left: auto !important;
   right: 9% !important;
 }
@@ -681,7 +683,7 @@
   margin-top: 35px;
 }
 .detail .container {
-  width: calc(100% - 120px);
+  width: calc(100% - 128px);
   align-items: flex-start;
   flex-direction: column;
   bottom: 40px;

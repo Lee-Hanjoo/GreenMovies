@@ -57,7 +57,7 @@ const Detail = () => {
         <div className='movie-info-wrap'>
           <div className='genre-wrap'>
           <TextList lang={`${cont.original_language}`}>
-            {cont.genres.slice(0, 5).map((genre,i)=>(
+            {cont.genres.slice(0, 4).map((genre,i)=>(
               <li key={i}>{genre.name}</li>
             ))}
           </TextList>
@@ -107,10 +107,13 @@ const Detail = () => {
                     spaceBetween={25}
                     breakpoints={{
                       479: {
-                        slidesPerView: 3.5
+                        slidesPerView: 1.5
                       },
-                      767: {
-                        slidesPerView: 4.5
+                      640: {
+                        slidesPerView: 2.5
+                      },
+                      769: {
+                        slidesPerView: 3.5
                       },
                       1279: {
                         slidesPerView: 5.5
@@ -140,10 +143,13 @@ const Detail = () => {
                   spaceBetween={25}
                   breakpoints={{
                     479: {
-                      slidesPerView: 3.5
+                      slidesPerView: 1.5
                     },
-                    767: {
-                      slidesPerView: 4.5
+                    640: {
+                      slidesPerView: 2.5
+                    },
+                    769: {
+                      slidesPerView: 3.5
                     },
                     1279: {
                       slidesPerView: 5.5
@@ -167,9 +173,17 @@ const Detail = () => {
               <Swiper 
                 navigation={true} 
                 modules={[Navigation]} 
-                slidesPerView={2.5}
+                slidesPerView={1.5}
                 spaceBetween={25}
                 className={`swiper trailer-list`}
+                breakpoints={{
+                  769: {
+                    slidesPerView: 1.5
+                  },
+                  1279: {
+                    slidesPerView: 2.5
+                  }
+                }}
               >
                 {cont.videos.results.slice(0, 5).map((video, i) => (
                   <SwiperSlide key={i}>

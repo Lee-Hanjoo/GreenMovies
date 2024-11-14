@@ -55,7 +55,7 @@ const SearchList = () => {
     'Reality': 10764,
     'Sci-Fi & Fantasy': 10765,
     'Soap': 10766,
-    'Talk': 10767,
+    'Talk': 10769,
     'War & Politics': 10768,
   };
 
