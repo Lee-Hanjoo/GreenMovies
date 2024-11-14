@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/GreenMovies/static/css/main.8ecb6ae2.css",
-    "main.js": "/GreenMovies/static/js/main.3e13858f.js",
+    "main.js": "/GreenMovies/static/js/main.d64edc3d.js",
     "static/js/453.ad244872.chunk.js": "/GreenMovies/static/js/453.ad244872.chunk.js",
     "static/media/backdrop_path_nodata.jpg": "/GreenMovies/static/media/backdrop_path_nodata.d9dab80fe4b0ef73656b.jpg",
     "static/media/bg_dim.png": "/GreenMovies/static/media/bg_dim.9823dd0c91af46826390.png",
@@ -20,11 +20,11 @@
     "static/media/icon_chk_on.svg": "/GreenMovies/static/media/icon_chk_on.deca3e011497637f8794.svg",
     "static/media/icon_chk.svg": "/GreenMovies/static/media/icon_chk.add2cc0050339b5cc885.svg",
     "main.8ecb6ae2.css.map": "/GreenMovies/static/css/main.8ecb6ae2.css.map",
-    "main.3e13858f.js.map": "/GreenMovies/static/js/main.3e13858f.js.map",
+    "main.d64edc3d.js.map": "/GreenMovies/static/js/main.d64edc3d.js.map",
     "453.ad244872.chunk.js.map": "/GreenMovies/static/js/453.ad244872.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8ecb6ae2.css",
-    "static/js/main.3e13858f.js"
+    "static/js/main.d64edc3d.js"
   ]
 }
