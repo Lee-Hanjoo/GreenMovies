@@ -18,7 +18,6 @@ const SearchList = () => {
     movieTv: 'movie',
     language: 'en',
     genre: baseGenre,
-    // sortBy: 'popularity.desc'
   })
 
   // 장르 리스트
@@ -70,7 +69,6 @@ const SearchList = () => {
   const genreList = getGenres();
 
   let withOriginalLanguage = sortObj.language;
-  let sortBy = sortObj.sortBy;
   let withTextQuery = searchInput.current.value;
 
   const movieBox = document.querySelector('.movie-list-box')
@@ -89,19 +87,20 @@ const SearchList = () => {
     });
   }
 
-  const getMovieTvData = async (myState, genre, withOriginalLanguage, withTextQuery, sortBy) => {
+  const getMovieTvData = async (myState, genre, withOriginalLanguage, withTextQuery) => {
 
     let contType = sortObj.movieTv;
-    const res = await api.list(contType, genre, withOriginalLanguage, withTextQuery, sortBy);
+    const res = await api.list(contType, genre, withOriginalLanguage, withTextQuery);
     
     setList(res)
     setLoading(false);
   }
   
   useEffect(() => {
-    getMovieTvData(myState, sortObj.genre, withOriginalLanguage, withTextQuery, sortBy)
+    getMovieTvData(myState, sortObj.genre, withOriginalLanguage, withTextQuery)
   }, [list])
 
+  
   useEffect(() => {
     if(myState === 'movie'){
       baseGenre = '28'
@@ -109,11 +108,10 @@ const SearchList = () => {
       baseGenre = '10759'
     }
   }, [sortObj, myState])
-  
+
   if (loading) {
     return <div>Loading...</div>
   }
-
 
   return (
     <div className='search-list wrap'>
@@ -121,7 +119,6 @@ const SearchList = () => {
         <div className='top'>
           <div className='sort-box'>
             <Sort type={'movieTv'} list={['Movies','Tv Series']} setSortObj={setSortObj} sortObj={sortObj} />
-            {/* <Sort type={'by'} list={['new', ${}]} setSortObj={setSortObj} sortObj={sortObj} /> */}
             <Sort type={'language'} list={['en', 'fr', 'ko', 'ja', 'zh']} setSortObj={setSortObj} sortObj={sortObj} />
           </div>
           <Search searchInput={searchInput}/>

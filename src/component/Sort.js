@@ -7,6 +7,18 @@ const Sort = (props) => {
   const [on, setOn] = useState(0);
   const [selectedItems, setSelectedItems] = useState([]);
 
+  useEffect(()=>{
+    setSortObj({...sortObj, genre: ''})
+    setSelectedItems([])
+  },[sortObj.language])
+
+  useEffect(()=>{
+    setSortObj({...sortObj, language: 'en'})
+    if(type === 'language') {
+      setOn(0)
+    }
+  },[sortObj.movieTv])
+  
 
   let item = Object.keys(props.list)
   let value = Object.values(props.list)
