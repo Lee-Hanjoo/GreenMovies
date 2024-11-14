@@ -102,11 +102,13 @@ const List = ({tab, setTab}) => {
               }
             </TextList>
           </div>
-          <h2 className='title'>
-            {
-              myState === 'tv' ? movies[storeMovieIdx].name : movies[storeMovieIdx].title
-            }
-          </h2>
+          <Link to={`/detail/${movies[storeMovieIdx].id}`}>
+            <h2 className='title'>
+              {
+                myState === 'tv' ? movies[storeMovieIdx].name : movies[storeMovieIdx].title
+              }
+            </h2>
+          </Link>
           <p className='desc'>
             {
               movies[storeMovieIdx].overview !== "" ?
